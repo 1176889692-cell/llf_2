@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodTI - 食物人格测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #FFF5E6 0%, #FFE4CC 50%, #FFD4B8 100%);
+            min-height: 100vh;
+            color: #4A3728;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 首页样式 */
+        .home-page {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .logo {
+            font-size: 72px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: 800;
+            color: #E8652B;
+            margin-bottom: 12px;
+            text-shadow: 2px 2px 4px rgba(232, 101, 43, 0.2);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #8B6B5A;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .subtitle-secondary {
+            font-size: 14px;
+            color: #A68B7B;
+            margin-bottom: 40px;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #FF8C42 0%, #E8652B 100%);
+            color: white;
+            border: none;
+            padding: 18px 60px;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(232, 101, 43, 0.3);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(232, 101, 43, 0.4);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .feature-text {
+            font-size: 13px;
+            color: #A68B7B;
+        }
+
+        /* 进度条样式 */
+        .progress-bar {
+            background: rgba(232, 101, 43, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF8C42 0%, #E8652B 100%);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 14px;
+            color: #A68B7B;
+            margin-bottom: 10px;
+        }
+
+        /* 问题页样式 */
+        .question-page {
+            flex: 1;
+            display: none;
+            flex-direction: column;
+            padding: 30px 0;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(139, 107, 90, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            font-size: 14px;
+            color: #E8652B;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: #FFF8F2;
+            border: 2px solid #FFE4CC;
+            border-radius: 12px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            color: #4A3728;
+        }
+
+        .option:hover {
+            border-color: #FF8C42;
+            background: #FFF0E0;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            border-color: #E8652B;
+            background: linear-gradient(135deg, #FFF0E0 0%, #FFE4CC 100%);
+            font-weight: 500;
+        }
+
+        /* 结果页样式 */
+        .result-page {
+            flex: 1;
+            display: none;
+            flex-direction: column;
+            padding: 30px 0;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(139, 107, 90, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result-emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #E8652B;
+            margin-bottom: 8px;
+        }
+
+        .result-subtitle {
+            font-size: 16px;
+            color: #8B6B5A;
+            margin-bottom: 25px;
+        }
+
+        .result-description {
+            font-size: 15px;
+            color: #6B5B4B;
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .trait {
+            background: linear-gradient(135deg, #FFE4CC 0%, #FFD4B8 100%);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #8B6B5A;
+        }
+
+        /* 雷达图容器 */
+        .radar-container {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(139, 107, 90, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .radar-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #4A3728;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        #radarChart {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        /* 分享按钮 */
+        .share-section {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(139, 107, 90, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .share-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #4A3728;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .share-btn.wechat {
+            background: #07C160;
+            color: white;
+        }
+
+        .share-btn.weibo {
+            background: #E6162D;
+            color: white;
+        }
+
+        .share-btn.copy {
+            background: #F0F0F0;
+            color: #4A3728;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #FF8C42 0%, #E8652B 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(232, 101, 43, 0.3);
+            margin: 0 auto;
+            display: block;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(232, 101, 43, 0.4);
+        }
+
+        /* 动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* 响应式 */
+        @media (max-width: 480px) {
+            .title {
+                font-size: 36px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+            }
+            
+            .question-text {
+                font-size: 18px;
+            }
+            
+            .result-title {
+                font-size: 24px;
+            }
+            
+            .features {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 首页 -->
+        <div class="home-page" id="homePage">
+            <div class="logo">🍕</div>
+            <h1 class="title">FoodTI</h1>
+            <p class="subtitle">测测你的食物人格是什么？</p>
+            <p class="subtitle-secondary">四个维度，解码你的美食DNA</p>
+            <button class="start-btn" onclick="startTest()">开始测试</button>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-text">15道精选题目</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">四维度分析</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎁</div>
+                    <div class="feature-text">8种人格类型</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 问题页 -->
+        <div class="question-page" id="questionPage">
+            <div class="progress-text">进度：<span id="currentNum">1</span>/15</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="question-card fade-in">
+                <div class="question-number" id="questionNumber">问题 1</div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options" id="optionsContainer"></div>
+            </div>
+        </div>
+
+        <!-- 结果页 -->
+        <div class="result-page" id="resultPage">
+            <div class="result-card fade-in">
+                <div class="result-emoji" id="resultEmoji"></div>
+                <h2 class="result-title" id="resultTitle"></h2>
+                <p class="result-subtitle" id="resultSubtitle"></p>
+                <div class="traits" id="traitsContainer"></div>
+                <div class="result-description" id="resultDescription"></div>
+            </div>
+            
+            <div class="radar-container fade-in">
+                <div class="radar-title">你的食物人格维度</div>
+                <canvas id="radarChart" width="300" height="300"></canvas>
+            </div>
+            
+            <div class="share-section fade-in">
+                <div class="share-title">分享给好友</div>
+                <div class="share-buttons">
+                    <button class="share-btn wechat" onclick="shareToWechat()">微信</button>
+                    <button class="share-btn weibo" onclick="shareToWeibo()">微博</button>
+                    <button class="share-btn copy" onclick="copyResult()">复制结果</button>
+                </div>
+            </div>
+            
+            <button class="restart-btn" onclick="restartTest()">重新测试</button>
+        </div>
+    </div>
+
+    <script>
+        // 测试题目数据
+        const questions = [
+            {
+                question: "周末聚餐，你会选择哪种餐厅？",
+                options: [
+                    { text: "新开的异国料理店，试试没吃过的", dimension: "A" },
+                    { text: "常去的老店，熟悉的味道让人安心", dimension: "S" }
+                ],
+                dimension: "AS"
+            },
+            {
+                question: "做饭时，你更享受哪个过程？",
+                options: [
+                    { text: "研究菜谱、准备食材的过程", dimension: "P" },
+                    { text: "快速搞定，享受美味的结果", dimension: "O" }
+                ],
+                dimension: "PO"
+            },
+            {
+                question: "发现一家超好吃的店，你会？",
+                options: [
+                    { text: "马上发朋友圈，约朋友一起去", dimension: "G" },
+                    { text: "自己先默默收藏，找机会独自去", dimension: "S" }
+                ],
+                dimension: "GS"
+            },
+            {
+                question: "点外卖时，你通常会？",
+                options: [
+                    { text: "凭感觉选，看着顺眼就点", dimension: "I" },
+                    { text: "仔细看评分、评论，对比多家", dimension: "A" }
+                ],
+                dimension: "IA"
+            },
+            {
+                question: "面对从未见过的食物，你会？",
+                options: [
+                    { text: "太好了！必须尝尝！", dimension: "A" },
+                    { text: "还是算了，不知道是什么做的", dimension: "S" }
+                ],
+                dimension: "AS"
+            },
+            {
+                question: "做一道菜时，你更在意？",
+                options: [
+                    { text: "烹饪的过程，享受每个步骤", dimension: "P" },
+                    { text: "最终的味道和摆盘效果", dimension: "O" }
+                ],
+                dimension: "PO"
+            },
+            {
+                question: "收到别人分享的美食，你会？",
+                options: [
+                    { text: "开心接受，下次也分享给他", dimension: "G" },
+                    { text: "礼貌感谢，但不太习惯这种互动", dimension: "S" }
+                ],
+                dimension: "GS"
+            },
+            {
+                question: "选择餐厅时，你更依赖？",
+                options: [
+                    { text: "直觉和氛围，走进去感觉对就行", dimension: "I" },
+                    { text: "大众点评评分和朋友推荐", dimension: "A" }
+                ],
+                dimension: "IA"
+            },
+            {
+                question: "你的冰箱通常是？",
+                options: [
+                    { text: "塞满各种新奇食材，随时准备尝试", dimension: "A" },
+                    { text: "固定几样常用食材，简单规律", dimension: "S" }
+                ],
+                dimension: "AS"
+            },
+            {
+                question: "对于食谱，你的态度是？",
+                options: [
+                    { text: "严格按步骤来，每一步都很重要", dimension: "P" },
+                    { text: "大概看看，自由发挥更重要", dimension: "O" }
+                ],
+                dimension: "PO"
+            },
+            {
+                question: "野餐或烧烤时，你通常？",
+                options: [
+                    { text: "主动组织，带很多食物分享", dimension: "G" },
+                    { text: "带自己那份就好，不太操心", dimension: "S" }
+                ],
+                dimension: "GS"
+            },
+            {
+                question: "买食材时，你更看重？",
+                options: [
+                    { text: "感觉新鲜就行，不太看标签", dimension: "I" },
+                    { text: "仔细看保质期、成分表", dimension: "A" }
+                ],
+                dimension: "IA"
+            },
+            {
+                question: "如果开一家餐厅，你会？",
+                options: [
+                    { text: "做融合创意菜，不断推陈出新", dimension: "A" },
+                    { text: "做经典家常菜，把传统味道做好", dimension: "S" }
+                ],
+                dimension: "AS"
+            },
+            {
+                question: "你认为美食的意义在于？",
+                options: [
+                    { text: "烹饪和品尝的过程本身", dimension: "P" },
+                    { text: "带来的饱腹感和满足感", dimension: "O" }
+                ],
+                dimension: "PO"
+            },
+            {
+                question: "最后一块蛋糕，你会？",
+                options: [
+                    { text: "切成小块，大家一起分享", dimension: "G" },
+                    { text: "留给自己，或者让给最想吃的人", dimension: "S" }
+                ],
+                dimension: "GS"
+            }
+        ];
+
+        // 人格类型数据
+        const personalityTypes = {
+            "APGI": {
+                name: "美食探险家",
+                englishName: "FOOD EXPLORER",
+                emoji: "🧭",
+                description: "你是天生的美食探险家！对你来说，食物不只是填饱肚子，更是探索世界的窗口。你热衷于尝试新奇的料理，享受烹饪的创意过程，喜欢和朋友分享新发现的美食。你的味蕾永远在期待下一次冒险！",
+                traits: ["勇于尝试", "创意烹饪", "乐于分享", "直觉敏锐"]
+            },
+            "SOSA": {
+                name: "营养计算器",
+                englishName: "CALORIE COUNTER",
+                emoji: "🧮",
+                description: "你是理性的营养计算器！你对食物有着科学的态度，注重营养搭配和热量控制。你习惯看配料表，选择有据可依的餐厅。虽然看起来很"较真"，但这是你对自己和健康负责的方式。",
+                traits: ["理性选择", "注重健康", "计划性强", "数据驱动"]
+            },
+            "AOGA": {
+                name: "社交食客",
+                englishName: "SOCIAL EATER",
+                emoji: "🎉",
+                description: "你是快乐的社交食客！对你来说，美食最好的调味料是朋友和欢笑。你热衷于组织聚餐、分享美食，在热闹的氛围中享受食物。你的朋友圈总是充满各种美食打卡照片！",
+                traits: ["社交达人", "氛围感强", "乐于组织", "结果导向"]
+            },
+            "SPSI": {
+                name: "慢食享受家",
+                englishName: "SLOW FOODIE",
+                emoji: "🍵",
+                description: "你是优雅的慢食享受家！你相信好食物值得等待。你享受亲手烹饪的过程，珍惜独处时的美食时光。对你来说，慢慢品尝一口好菜，比狼吞虎咽更有意义。",
+                traits: ["享受过程", "品味细腻", "独处自在", "直觉敏锐"]
+            },
+            "APSA": {
+                name: "独行美食家",
+                englishName: "LONE GOURMET",
+                emoji: "🎭",
+                description: "你是特立独行的独行美食家！你有自己独特的美食标准，不在乎别人的评价。你喜欢独自探索美食，享受一个人的味觉冒险。你的美食地图，只有你自己能懂。",
+                traits: ["独立自主", "标准独特", "享受独处", "分析能力强"]
+            },
+            "SOGI": {
+                name: "随缘干饭人",
+                englishName: "CASUAL DINER",
+                emoji: "🌾",
+                description: "你是随性的随缘干饭人！你对食物没有太多执念，吃饱就好。你很容易满足，朋友请吃什么就吃什么，从不挑剔。这种随和的态度让你在任何饭局都很受欢迎！",
+                traits: ["随遇而安", "容易满足", "社交随和", "不拘小节"]
+            },
+            "AOSA": {
+                name: "即食效率派",
+                englishName: "FAST FUEL",
+                emoji: "⚡",
+                description: "你是高效的即食效率派！在你看来，食物主要是燃料，快速补充能量最重要。你偏好快捷方便的饮食方式，不太愿意花太多时间在烹饪上。效率就是你的美食哲学！",
+                traits: ["效率至上", "注重结果", "独立决策", "理性选择"]
+            },
+            "SPGI": {
+                name: "温暖家常派",
+                englishName: "HOME COOK",
+                emoji: "🏠",
+                description: "你是温暖的温暖家常派！你最爱的是妈妈的味道和家的感觉。你喜欢在家做饭，享受烹饪带来的温馨感。和家人朋友围坐在一起吃顿家常饭，就是你最大的幸福。",
+                traits: ["热爱烹饪", "注重分享", "温馨治愈", "直觉敏锐"]
+            }
+        };
+
+        let currentQuestion = 0;
+        let answers = {
+            A: 0, S: 0,  // 冒险度 vs 安全感
+            P: 0, O: 0,  // 过程型 vs 结果型
+            G: 0, S: 0,  // 共享型 vs 独享型（复用S，需要特殊处理）
+            I: 0, A: 0   // 直觉型 vs 分析型（复用A，需要特殊处理）
+        };
+
+        // 使用更清晰的维度追踪
+        let dimensions = {
+            adventure: 0,  // A vs S - 冒险度
+            process: 0,    // P vs O - 过程型
+            share: 0,      // G vs S - 共享型
+            intuition: 0   // I vs A - 直觉型
+        };
+
+        function startTest() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('questionPage').style.display = 'flex';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('currentNum').textContent = currentQuestion + 1;
+            document.getElementById('questionNumber').textContent = `问题 ${currentQuestion + 1}`;
+            document.getElementById('questionText').textContent = q.question;
+            document.getElementById('progressFill').style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option.text;
+                optionDiv.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            // 重置动画
+            const card = document.querySelector('.question-card');
+            card.classList.remove('fade-in');
+            void card.offsetWidth;
+            card.classList.add('fade-in');
+        }
+
+        function selectOption(index) {
+            const q = questions[currentQuestion];
+            const selectedDimension = q.options[index].dimension;
+            
+            // 更新维度分数
+            switch(q.dimension) {
+                case 'AS':
+                    if (selectedDimension === 'A') dimensions.adventure++;
+                    break;
+                case 'PO':
+                    if (selectedDimension === 'P') dimensions.process++;
+                    break;
+                case 'GS':
+                    if (selectedDimension === 'G') dimensions.share++;
+                    break;
+                case 'IA':
+                    if (selectedDimension === 'I') dimensions.intuition++;
+                    break;
+            }
+
+            // 高亮选中的选项
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[index].classList.add('selected');
+
+            // 延迟后进入下一题
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 500);
+        }
+
+        function calculateType() {
+            const type = 
+                (dimensions.adventure >= 8 ? 'A' : 'S') +
+                (dimensions.process >= 8 ? 'P' : 'O') +
+                (dimensions.share >= 8 ? 'G' : 'S') +
+                (dimensions.intuition >= 8 ? 'I' : 'A');
+            return type;
+        }
+
+        function showResult() {
+            document.getElementById('questionPage').style.display = 'none';
+            document.getElementById('resultPage').style.display = 'flex';
+            
+            const type = calculateType();
+            const personality = personalityTypes[type] || personalityTypes['SOGI'];
+            
+            document.getElementById('resultEmoji').textContent = personality.emoji;
+            document.getElementById('resultTitle').textContent = personality.name;
+            document.getElementById('resultSubtitle').textContent = personality.englishName;
+            document.getElementById('resultDescription').textContent = personality.description;
+            
+            const traitsContainer = document.getElementById('traitsContainer');
+            traitsContainer.innerHTML = personality.traits.map(trait => 
+                `<span class="trait">${trait}</span>`
+            ).join('');
+            
+            drawRadarChart();
+            
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+        }
+
+        function drawRadarChart() {
+            const canvas = document.getElementById('radarChart');
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 100;
+            
+            // 清空画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 维度标签
+            const labels = ['冒险度', '过程型', '共享型', '直觉型'];
+            const values = [
+                dimensions.adventure / 15,
+                dimensions.process / 15,
+                dimensions.share / 15,
+                dimensions.intuition / 15
+            ];
+            
+            // 绘制背景网格
+            for (let i = 4; i > 0; i--) {
+                const r = (radius * i) / 4;
+                ctx.beginPath();
+                for (let j = 0; j < 4; j++) {
+                    const angle = (Math.PI / 2) + (Math.PI * 2 * j) / 4;
+                    const x = centerX + r * Math.cos(angle);
+                    const y = centerY - r * Math.sin(angle);
+                    if (j === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = '#FFE4CC';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+            
+            // 绘制坐标轴
+            for (let i = 0; i < 4; i++) {
+                const angle = (Math.PI / 2) + (Math.PI * 2 * i) / 4;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY - radius * Math.sin(angle);
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(x, y);
+                ctx.strokeStyle = '#FFD4B8';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                
+                // 绘制标签
+                const labelX = centerX + (radius + 25) * Math.cos(angle);
+                const labelY = centerY - (radius + 25) * Math.sin(angle);
+                ctx.font = '14px -apple-system, sans-serif';
+                ctx.fillStyle = '#8B6B5A';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(labels[i], labelX, labelY);
+            }
+            
+            // 绘制数据区域
+            ctx.beginPath();
+            for (let i = 0; i < 4; i++) {
+                const angle = (Math.PI / 2) + (Math.PI * 2 * i) / 4;
+                const r = radius * Math.max(0.3, values[i]);
+                const x = centerX + r * Math.cos(angle);
+                const y = centerY - r * Math.sin(angle);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(232, 101, 43, 0.2)';
+            ctx.fill();
+            ctx.strokeStyle = '#E8652B';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            // 绘制数据点
+            for (let i = 0; i < 4; i++) {
+                const angle = (Math.PI / 2) + (Math.PI * 2 * i) / 4;
+                const r = radius * Math.max(0.3, values[i]);
+                const x = centerX + r * Math.cos(angle);
+                const y = centerY - r * Math.sin(angle);
+                ctx.beginPath();
+                ctx.arc(x, y, 6, 0, Math.PI * 2);
+                ctx.fillStyle = '#E8652B';
+                ctx.fill();
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        }
+
+        function shareToWechat() {
+            alert('请截图分享到微信朋友圈！');
+        }
+
+        function shareToWeibo() {
+            const type = calculateType();
+            const personality = personalityTypes[type];
+            const text = `我的FoodTI食物人格是【${personality.name}】！${personality.emoji} 快来测测你的食物人格是什么？`;
+            const url = `https://service.weibo.com/share/share.php?title=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        function copyResult() {
+            const type = calculateType();
+            const personality = personalityTypes[type];
+            const text = `🍕 FoodTI 食物人格测试\n\n我的结果：${personality.emoji} ${personality.name}\n${personality.englishName}\n\n${personality.description}\n\n快来测测你的食物人格吧！`;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('结果已复制到剪贴板！');
+            }).catch(() => {
+                // 降级方案
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('结果已复制到剪贴板！');
+            });
+        }
+
+        function restartTest() {
+            currentQuestion = 0;
+            dimensions = {
+                adventure: 0,
+                process: 0,
+                share: 0,
+                intuition: 0
+            };
+            document.getElementById('resultPage').style.display = 'none';
+            document.getElementById('homePage').style.display = 'flex';
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
