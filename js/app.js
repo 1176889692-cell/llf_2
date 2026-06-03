@@ -985,40 +985,45 @@ function getSubDimIndex(qId) {
 //  §8  SHOW RESULT
 // ═══════════════════════════════════════════════
 function showResult() {
-  const result = calculateResult();
-  currentResult = result;
+  try {
+    const result = calculateResult();
+    currentResult = result;
 
-  // Save to history
-  saveToHistory(result);
+    // Save to history
+    saveToHistory(result);
 
-  // Update URL
-  const params = encodeShareParams(result);
-  window.history.pushState(null, '', `?${params}`);
+    // Update URL
+    const params = encodeShareParams(result);
+    window.history.pushState(null, '', `?${params}`);
 
-  $('#progress-fill').style.width = '100%';
-  showPage('result');
-  renderResult(result);
-  launchConfetti();
+    $('#progress-fill').style.width = '100%';
+    showPage('result');
+    renderResult(result);
+    launchConfetti();
+  } catch (e) {
+    console.error('showResult error:', e);
+    alert('计算结果时出错: ' + e.message);
+  }
 }
 
 function renderResult(result) {
   const type = result.type;
 
-  renderAvatar(type);
-  renderPersonalityCard(type);
+  try { renderAvatar(type); } catch(e) { console.error('avatar', e); }
+  try { renderPersonalityCard(type); } catch(e) { console.error('pcard', e); }
 
   $('#result-emoji').textContent = type.emoji;
   $('#result-name').textContent = type.name;
   $('#result-en').textContent = type.en;
   $('#result-tagline').textContent = type.tagline;
 
-  renderRadarChart(result.subDimScores);
-  renderDimensionBars(result.dimScores);
-  renderBehaviorProfile(type);
-  renderDescription(type);
-  renderSimilarTypes(result.parentKey, result.dimScores);
-  renderSuggestions(type);
-  renderTypeGrid(result.typeKey);
+  try { renderRadarChart(result.subDimScores); } catch(e) { console.error('radar', e); }
+  try { renderDimensionBars(result.dimScores); } catch(e) { console.error('dimbars', e); }
+  try { renderBehaviorProfile(type); } catch(e) { console.error('behavior', e); }
+  try { renderDescription(type); } catch(e) { console.error('desc', e); }
+  try { renderSimilarTypes(result.parentKey, result.dimScores); } catch(e) { console.error('similar', e); }
+  try { renderSuggestions(type); } catch(e) { console.error('suggest', e); }
+  try { renderTypeGrid(result.typeKey); } catch(e) { console.error('grid', e); }
 }
 
 
