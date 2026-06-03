@@ -36,6 +36,9 @@
       <button class="start-btn" onclick="startQuiz()">
         开始测试 🍴
       </button>
+      <button class="history-btn" onclick="showHistory()">
+        📜 历史记录
+      </button>
       <div class="landing-features">
         <div class="feature-item">
           <span class="feature-icon">🧩</span>
@@ -51,7 +54,7 @@
         </div>
         <div class="feature-item">
           <span class="feature-icon">🏆</span>
-          <span>8种类型</span>
+          <span>24种类型</span>
         </div>
       </div>
     </div>
@@ -61,16 +64,14 @@
       <div class="progress-container">
         <div class="progress-info">
           <span id="progress-text" class="progress-text">1 / 18</span>
-          <span id="progress-dim" class="progress-dim">冒险-安全维度</span>
+          <span id="progress-dim" class="progress-dim">冒险-安全</span>
         </div>
         <div class="progress-bar">
           <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
         </div>
       </div>
 
-      <div id="question-container" class="question-card">
-        <!-- Rendered by JS -->
-      </div>
+      <div id="question-container" class="question-card"></div>
 
       <div class="nav-buttons">
         <button id="btn-back" class="nav-btn back hidden" onclick="goBack()">← 上一题</button>
@@ -80,9 +81,13 @@
 
     <!-- ===== Result Page ===== -->
     <div id="result" class="page result-page">
-      <!-- Personality Card (visual, gradient-based) -->
+      <!-- Avatar -->
+      <div id="avatar-container" class="avatar-section"></div>
+
+      <!-- Personality Card -->
       <div id="personality-card"></div>
 
+      <!-- Header -->
       <div class="result-header">
         <div class="result-label">你的食物人格是</div>
         <div id="result-emoji" class="result-type-emoji">🧭</div>
@@ -91,34 +96,42 @@
         <div id="result-tagline" class="result-tagline"></div>
       </div>
 
+      <!-- 8-Axis Radar Chart -->
       <div class="result-card">
-        <div class="result-card-title">📊 你的美食DNA</div>
-        <div class="chart-container">
+        <div class="result-card-title">🧬 你的美食DNA</div>
+        <div class="chart-container chart-large">
           <canvas id="radar-chart"></canvas>
         </div>
       </div>
 
+      <!-- Dimension Bars -->
       <div class="result-card">
-        <div class="result-card-title">📈 维度详情</div>
-        <div id="dimension-bars" class="dimension-bars">
-          <!-- Rendered by JS -->
-        </div>
+        <div class="result-card-title">📊 维度详情</div>
+        <div id="dimension-bars" class="dimension-bars"></div>
       </div>
 
+      <!-- Behavior Profile -->
+      <div class="result-card" id="behavior-profile"></div>
+
+      <!-- Description -->
       <div class="result-card">
         <div class="result-card-title">📝 类型解读</div>
-        <div id="result-description" class="result-description">
-          <!-- Rendered by JS -->
-        </div>
+        <div id="result-description" class="result-description"></div>
       </div>
 
+      <!-- Similar Types -->
+      <div class="result-card" id="similar-types"></div>
+
+      <!-- Suggestions -->
+      <div class="result-card" id="suggestions"></div>
+
+      <!-- All Types Grid -->
       <div class="result-card">
         <div class="result-card-title">🗺️ 所有食物人格</div>
-        <div id="type-grid" class="type-grid">
-          <!-- Rendered by JS -->
-        </div>
+        <div id="type-grid" class="type-grid"></div>
       </div>
 
+      <!-- Share -->
       <div class="share-section">
         <div class="share-buttons">
           <button class="share-btn primary" onclick="shareResult()">📤 分享结果</button>
@@ -128,6 +141,20 @@
       </div>
 
       <div class="footer">FoodTI — 四个维度，解码你的美食DNA</div>
+    </div>
+
+    <!-- ===== History Page ===== -->
+    <div id="history" class="page history-page">
+      <div class="history-header">
+        <button class="back-home-btn" onclick="restart()">← 返回首页</button>
+        <h2 class="history-title">📜 测试历史</h2>
+      </div>
+
+      <div id="history-stats" class="history-stats"></div>
+      <div id="history-trend" class="result-card history-trend-card"></div>
+      <div id="history-list" class="history-list"></div>
+
+      <div class="footer">FoodTI — 记录你的每一次美食人格</div>
     </div>
 
   </div>
