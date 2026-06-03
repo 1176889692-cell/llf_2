@@ -7,12 +7,8 @@
     <meta name="description" content="通过20道精选题目，解码你的美食DNA，发现你的食物人格类型">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍕</text></svg>">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         :root {
             --primary: #E8652B;
             --primary-light: #FF8C42;
@@ -31,752 +27,327 @@
             --radius-sm: 12px;
             --radius-md: 16px;
             --radius-lg: 24px;
-            --radius-xl: 32px;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
             background: var(--bg-warm);
             min-height: 100vh;
             color: var(--text-dark);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
         }
 
         .bg-pattern {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(232, 101, 43, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 179, 71, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(255, 228, 204, 0.3) 0%, transparent 70%);
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(232, 101, 43, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 179, 71, 0.08) 0%, transparent 50%);
         }
 
         .container {
-            position: relative;
-            z-index: 1;
-            max-width: 520px;
-            margin: 0 auto;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            position: relative; z-index: 1;
+            max-width: 520px; margin: 0 auto; padding: 20px;
+            min-height: 100vh; display: flex; flex-direction: column;
         }
 
-        /* 首页样式 */
+        /* 首页 */
         .home-page {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 40px 20px;
-            animation: fadeInUp 0.8s ease;
+            flex: 1; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            padding: 40px 20px; animation: fadeInUp 0.8s ease;
         }
 
-        .logo-container {
-            position: relative;
-            margin-bottom: 32px;
-        }
-
-        .logo {
-            font-size: 80px;
-            line-height: 1;
-            filter: drop-shadow(0 8px 16px rgba(232, 101, 43, 0.3));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .logo-badge {
-            position: absolute;
-            top: -8px;
-            right: -16px;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(232, 101, 43, 0.4);
-        }
-
+        .logo { font-size: 80px; margin-bottom: 24px; filter: drop-shadow(0 8px 16px rgba(232, 101, 43, 0.3)); }
+        
         .title {
-            font-size: 52px;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 52px; font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 16px;
-            letter-spacing: -1px;
         }
 
-        .subtitle {
-            font-size: 18px;
-            color: var(--text-medium);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .subtitle-secondary {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
+        .subtitle { font-size: 18px; color: var(--text-medium); margin-bottom: 8px; font-weight: 500; }
+        .subtitle-secondary { font-size: 14px; color: var(--text-muted); margin-bottom: 40px; }
 
         .start-btn {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
-            color: white;
-            border: none;
-            padding: 18px 64px;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 60px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 24px rgba(232, 101, 43, 0.35);
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white; border: none; padding: 18px 64px; font-size: 18px;
+            font-weight: 700; border-radius: 60px; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 8px 24px rgba(232, 101, 43, 0.35);
         }
 
-        .start-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .start-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(232, 101, 43, 0.45);
-        }
-
-        .start-btn:hover::before {
-            left: 100%;
-        }
-
-        .start-btn:active {
-            transform: translateY(-2px);
-        }
+        .start-btn:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(232, 101, 43, 0.45); }
 
         .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 56px;
-            width: 100%;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 16px; margin-top: 48px; width: 100%;
         }
 
         .feature {
-            text-align: center;
-            padding: 20px 12px;
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
+            text-align: center; padding: 20px 12px;
+            background: var(--bg-card); border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm); transition: all 0.3s ease;
         }
 
-        .feature:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
+        .feature:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .feature-icon { font-size: 32px; margin-bottom: 10px; display: block; }
+        .feature-text { font-size: 13px; color: var(--text-light); font-weight: 500; }
+
+        /* 历史按钮 */
+        .history-btn {
+            margin-top: 24px; background: none; border: 1px solid var(--border-light);
+            color: var(--text-light); padding: 10px 24px; border-radius: 30px;
+            cursor: pointer; font-size: 14px; transition: all 0.3s ease;
         }
 
-        .feature-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-            display: block;
-        }
+        .history-btn:hover { border-color: var(--primary); color: var(--primary); }
 
-        .feature-text {
-            font-size: 13px;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        /* 进度条样式 */
+        /* 进度条 */
         .progress-container {
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            padding: 16px 20px;
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 20px;
+            background: var(--bg-card); border-radius: var(--radius-md);
+            padding: 16px 20px; box-shadow: var(--shadow-sm); margin-bottom: 20px;
         }
 
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
+        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .progress-text { font-size: 14px; color: var(--text-light); font-weight: 500; }
+        .progress-percent { font-size: 14px; color: var(--primary); font-weight: 700; }
+        .progress-bar { background: var(--border-light); height: 8px; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-light), var(--primary)); border-radius: 4px; transition: width 0.5s ease; }
 
-        .progress-text {
-            font-size: 14px;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        .progress-percent {
-            font-size: 14px;
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        .progress-bar {
-            background: var(--border-light);
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-light), var(--primary));
-            border-radius: 4px;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        /* 问题页样式 */
+        /* 问题页 */
         .question-page {
-            flex: 1;
-            display: none;
-            flex-direction: column;
-            padding: 20px 0;
-            animation: fadeInUp 0.5s ease;
+            flex: 1; display: none; flex-direction: column;
+            padding: 20px 0; animation: fadeInUp 0.5s ease;
         }
 
         .question-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            padding: 28px 24px;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .question-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-light), var(--accent));
+            background: var(--bg-card); border-radius: var(--radius-lg);
+            padding: 28px 24px; box-shadow: var(--shadow-md); margin-bottom: 16px;
         }
 
         .question-dimension {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--primary);
-            background: rgba(232, 101, 43, 0.1);
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            display: inline-block; font-size: 11px; font-weight: 700;
+            color: var(--primary); background: rgba(232, 101, 43, 0.1);
+            padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
         }
 
-        .question-text {
-            font-size: 20px;
-            font-weight: 600;
-            line-height: 1.6;
-            color: var(--text-dark);
-            margin-bottom: 28px;
-        }
+        .question-text { font-size: 20px; font-weight: 600; line-height: 1.6; margin-bottom: 24px; }
 
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .options { display: flex; flex-direction: column; gap: 12px; }
 
         .option {
-            background: var(--bg-warm);
-            border: 2px solid transparent;
-            border-radius: var(--radius-sm);
-            padding: 18px 20px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 15px;
-            color: var(--text-medium);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            position: relative;
-            overflow: hidden;
+            background: var(--bg-warm); border: 2px solid transparent;
+            border-radius: var(--radius-sm); padding: 16px 20px;
+            cursor: pointer; transition: all 0.3s ease; font-size: 15px;
+            display: flex; align-items: center; gap: 14px;
         }
 
         .option-letter {
-            width: 32px;
-            height: 32px;
-            background: var(--bg-card);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-            color: var(--text-light);
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
+            width: 32px; height: 32px; background: var(--bg-card);
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-weight: 700; font-size: 14px;
+            color: var(--text-light); flex-shrink: 0; transition: all 0.3s ease;
         }
 
-        .option-text {
-            flex: 1;
-            line-height: 1.5;
-        }
+        .option:hover { border-color: var(--primary-light); background: rgba(255, 140, 66, 0.08); transform: translateX(4px); }
+        .option:hover .option-letter { background: var(--primary-light); color: white; }
+        .option.selected { border-color: var(--primary); background: linear-gradient(135deg, rgba(232, 101, 43, 0.08), rgba(255, 179, 71, 0.08)); }
+        .option.selected .option-letter { background: var(--primary); color: white; }
 
-        .option:hover {
-            border-color: var(--primary-light);
-            background: rgba(255, 140, 66, 0.08);
-            transform: translateX(4px);
-        }
-
-        .option:hover .option-letter {
-            background: var(--primary-light);
-            color: white;
-        }
-
-        .option.selected {
-            border-color: var(--primary);
-            background: linear-gradient(135deg, rgba(232, 101, 43, 0.08), rgba(255, 179, 71, 0.08));
-        }
-
-        .option.selected .option-letter {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* 结果页样式 */
+        /* 结果页 */
         .result-page {
-            flex: 1;
-            display: none;
-            flex-direction: column;
-            padding: 20px 0;
-            animation: fadeInUp 0.6s ease;
+            flex: 1; display: none; flex-direction: column;
+            padding: 20px 0; animation: fadeInUp 0.6s ease;
         }
 
         .result-hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            border-radius: var(--radius-xl);
-            padding: 36px 28px;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: var(--radius-lg); padding: 36px 28px;
+            text-align: center; margin-bottom: 20px;
             box-shadow: 0 12px 40px rgba(232, 101, 43, 0.3);
         }
 
-        .result-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            animation: rotate 20s linear infinite;
-        }
-
-        .result-emoji {
-            font-size: 72px;
-            margin-bottom: 16px;
-            position: relative;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-        }
-
-        .result-type-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: rgba(255,255,255,0.8);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            position: relative;
-        }
-
-        .result-title {
-            font-size: 32px;
-            font-weight: 900;
-            color: white;
-            margin-bottom: 6px;
-            position: relative;
-        }
-
-        .result-english {
-            font-size: 14px;
-            color: rgba(255,255,255,0.7);
-            font-weight: 500;
-            letter-spacing: 1px;
-            position: relative;
-        }
+        .result-avatar { margin-bottom: 16px; }
+        .result-type-label { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.8); letter-spacing: 2px; margin-bottom: 8px; }
+        .result-title { font-size: 32px; font-weight: 900; color: white; margin-bottom: 6px; }
+        .result-english { font-size: 14px; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
 
         .result-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 16px;
+            background: var(--bg-card); border-radius: var(--radius-lg);
+            padding: 24px; box-shadow: var(--shadow-md); margin-bottom: 16px;
         }
 
         .card-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 16px; font-weight: 700; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 8px;
         }
 
-        .card-title-icon {
-            font-size: 20px;
-        }
+        .result-description { font-size: 15px; color: var(--text-medium); line-height: 1.8; }
 
-        .result-description {
-            font-size: 15px;
-            color: var(--text-medium);
-            line-height: 1.8;
-            text-align: justify;
-        }
-
-        .traits-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
+        .traits-grid { display: flex; flex-wrap: wrap; gap: 10px; }
         .trait {
             background: linear-gradient(135deg, rgba(232, 101, 43, 0.08), rgba(255, 179, 71, 0.12));
             border: 1px solid rgba(232, 101, 43, 0.15);
-            padding: 8px 16px;
-            border-radius: 24px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--primary);
+            padding: 8px 16px; border-radius: 24px; font-size: 13px;
+            font-weight: 600; color: var(--primary);
         }
 
-        /* 雷达图容器 */
-        .radar-section {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 16px;
+        /* 行为分析 */
+        .behavior-analysis { margin-top: 16px; }
+        .behavior-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 0; border-bottom: 1px solid var(--border-light);
         }
 
-        .radar-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 20px;
-            text-align: center;
+        .behavior-item:last-child { border-bottom: none; }
+        .behavior-icon { font-size: 24px; }
+        .behavior-content { flex: 1; }
+        .behavior-label { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+        .behavior-value { font-size: 15px; font-weight: 600; color: var(--text-dark); }
+
+        /* DNA图 */
+        .dna-section {
+            background: var(--bg-card); border-radius: var(--radius-lg);
+            padding: 24px; box-shadow: var(--shadow-md); margin-bottom: 16px;
         }
 
-        .radar-wrapper {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 24px;
+        .dna-title { font-size: 16px; font-weight: 700; margin-bottom: 20px; text-align: center; }
+
+        .dna-chart { display: flex; flex-direction: column; gap: 16px; }
+
+        .dna-bar {
+            display: flex; align-items: center; gap: 12px;
         }
 
-        #radarChart {
-            width: 280px;
-            height: 280px;
+        .dna-label {
+            width: 80px; font-size: 13px; font-weight: 600;
+            color: var(--text-medium); text-align: right;
         }
 
-        .dimension-explanations {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
+        .dna-track {
+            flex: 1; height: 24px; background: var(--bg-warm);
+            border-radius: 12px; overflow: hidden; position: relative;
         }
+
+        .dna-fill {
+            height: 100%; border-radius: 12px; transition: width 1s ease;
+            display: flex; align-items: center; justify-content: flex-end;
+            padding-right: 8px; font-size: 12px; font-weight: 700; color: white;
+        }
+
+        .dna-value {
+            width: 50px; font-size: 14px; font-weight: 700;
+            color: var(--primary); text-align: left;
+        }
+
+        /* 维度解释 */
+        .dimension-explanations { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
 
         .dimension-card {
-            background: var(--bg-warm);
-            border-radius: var(--radius-sm);
-            padding: 16px;
-            transition: all 0.3s ease;
+            background: var(--bg-warm); border-radius: var(--radius-sm); padding: 16px;
         }
 
-        .dimension-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
-        }
+        .dimension-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .dimension-icon { font-size: 20px; }
+        .dimension-name { font-size: 13px; font-weight: 700; }
+        .dimension-score { font-size: 24px; font-weight: 900; color: var(--primary); margin-bottom: 4px; }
+        .dimension-label { font-size: 11px; color: var(--text-muted); }
+        .dimension-desc { font-size: 12px; color: var(--text-light); line-height: 1.5; margin-top: 8px; }
 
-        .dimension-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .dimension-icon {
-            font-size: 20px;
-        }
-
-        .dimension-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .dimension-score {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--primary);
-            margin-bottom: 4px;
-        }
-
-        .dimension-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .dimension-desc {
-            font-size: 12px;
-            color: var(--text-light);
-            line-height: 1.5;
-            margin-top: 8px;
-        }
-
-        /* 分享按钮 */
+        /* 分享 */
         .share-section {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            box-shadow: var(--shadow-md);
+            background: var(--bg-card); border-radius: var(--radius-lg);
+            padding: 24px; box-shadow: var(--shadow-md); margin-bottom: 20px;
+        }
+
+        .share-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; text-align: center; }
+        .share-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+
+        .share-btn {
+            flex: 1; min-width: 80px; padding: 14px 16px; border: none;
+            border-radius: var(--radius-sm); font-size: 14px; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+
+        .share-btn.wechat { background: #07C160; color: white; }
+        .share-btn.weibo { background: #E6162D; color: white; }
+        .share-btn.link { background: var(--bg-warm); color: var(--text-medium); border: 1px solid var(--border-light); }
+        .share-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        .restart-btn {
+            background: var(--bg-card); color: var(--primary);
+            border: 2px solid var(--primary); padding: 16px 48px;
+            font-size: 16px; font-weight: 700; border-radius: 60px;
+            cursor: pointer; transition: all 0.3s ease;
+            margin: 0 auto 30px; display: block;
+        }
+
+        .restart-btn:hover { background: var(--primary); color: white; }
+
+        /* 历史页 */
+        .history-page {
+            flex: 1; display: none; flex-direction: column;
+            padding: 20px 0; animation: fadeInUp 0.5s ease;
+        }
+
+        .history-header {
+            display: flex; align-items: center; justify-content: space-between;
             margin-bottom: 20px;
         }
 
-        .share-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 16px;
-            text-align: center;
+        .back-btn {
+            background: none; border: none; font-size: 24px; cursor: pointer;
+            color: var(--text-medium); padding: 8px;
         }
 
-        .share-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
+        .history-title { font-size: 20px; font-weight: 700; }
+
+        .history-list { display: flex; flex-direction: column; gap: 12px; }
+
+        .history-item {
+            background: var(--bg-card); border-radius: var(--radius-md);
+            padding: 16px 20px; box-shadow: var(--shadow-sm);
+            cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 16px;
         }
 
-        .share-btn {
-            flex: 1;
-            min-width: 100px;
-            padding: 14px 20px;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+        .history-item:hover { transform: translateX(4px); box-shadow: var(--shadow-md); }
+        .history-emoji { font-size: 40px; }
+        .history-info { flex: 1; }
+        .history-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+        .history-date { font-size: 13px; color: var(--text-muted); }
+        .history-arrow { font-size: 20px; color: var(--text-muted); }
+
+        .empty-history {
+            text-align: center; padding: 60px 20px; color: var(--text-muted);
         }
 
-        .share-btn:active {
-            transform: scale(0.95);
+        .empty-history-icon { font-size: 60px; margin-bottom: 16px; }
+        .empty-history-text { font-size: 16px; }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 30px; left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text-dark); color: white;
+            padding: 14px 28px; border-radius: 50px;
+            font-size: 14px; z-index: 1001;
+            transition: transform 0.3s ease; box-shadow: var(--shadow-lg);
         }
 
-        .share-btn.wechat {
-            background: #07C160;
-            color: white;
-        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
 
-        .share-btn.weibo {
-            background: #E6162D;
-            color: white;
-        }
-
-        .share-btn.copy {
-            background: var(--bg-warm);
-            color: var(--text-medium);
-            border: 1px solid var(--border-light);
-        }
-
-        .share-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .share-btn .btn-icon {
-            font-size: 18px;
-        }
-
-        .restart-btn {
-            background: var(--bg-card);
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            padding: 16px 48px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 60px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 0 auto 30px;
-            display: block;
-        }
-
-        .restart-btn:hover {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 8px 24px rgba(232, 101, 43, 0.3);
-        }
-
-        /* 页脚 */
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 12px;
-        }
-
-        /* 动画 */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(24px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.5s ease forwards;
-        }
-
-        /* 响应式 */
         @media (max-width: 480px) {
-            .title {
-                font-size: 42px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-            }
-            
-            .question-text {
-                font-size: 18px;
-            }
-            
-            .result-title {
-                font-size: 28px;
-            }
-            
-            .features {
-                gap: 12px;
-            }
-            
-            .feature {
-                padding: 16px 8px;
-            }
-            
-            .feature-icon {
-                font-size: 28px;
-            }
-
-            .dimension-explanations {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* 加载状态 */
-        .loading {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 248, 242, 0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .loading.active {
-            display: flex;
-        }
-
-        .loading-spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid var(--border-light);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        .loading-text {
-            margin-top: 16px;
-            color: var(--text-light);
-            font-size: 14px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--text-dark);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 500;
-            z-index: 1001;
-            transition: transform 0.3s ease;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
+            .title { font-size: 42px; }
+            .question-text { font-size: 18px; }
+            .result-title { font-size: 28px; }
+            .dimension-explanations { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -786,28 +357,26 @@
     <div class="container">
         <!-- 首页 -->
         <div class="home-page" id="homePage">
-            <div class="logo-container">
-                <div class="logo">🍕</div>
-                <span class="logo-badge">2024</span>
-            </div>
+            <div class="logo">🍕</div>
             <h1 class="title">FoodTI</h1>
             <p class="subtitle">测测你的食物人格是什么？</p>
-            <p class="subtitle-secondary">四个维度，二十道题，解码你的美食DNA</p>
+            <p class="subtitle-secondary">四个维度 · 十六种人格 · 解码你的美食DNA</p>
             <button class="start-btn" onclick="startTest()">开始测试</button>
             <div class="features">
                 <div class="feature">
                     <span class="feature-icon">🎯</span>
-                    <span class="feature-text">40+题库<br>随机20题</span>
+                    <span class="feature-text">20道精选题</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🧬</span>
+                    <span class="feature-text">16种人格</span>
                 </div>
                 <div class="feature">
                     <span class="feature-icon">📊</span>
-                    <span class="feature-text">四维度<br>深度分析</span>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">🎁</span>
-                    <span class="feature-text">8种人格<br>精准匹配</span>
+                    <span class="feature-text">深度分析</span>
                 </div>
             </div>
+            <button class="history-btn" onclick="showHistory()">📋 查看历史记录</button>
         </div>
 
         <!-- 问题页 -->
@@ -831,577 +400,707 @@
         <!-- 结果页 -->
         <div class="result-page" id="resultPage">
             <div class="result-hero">
-                <div class="result-emoji" id="resultEmoji"></div>
+                <div class="result-avatar" id="resultAvatar"></div>
                 <div class="result-type-label">你的食物人格</div>
                 <h2 class="result-title" id="resultTitle"></h2>
                 <p class="result-english" id="resultEnglish"></p>
             </div>
             
             <div class="result-card">
-                <div class="card-title">
-                    <span class="card-title-icon">📝</span>
-                    人格解读
-                </div>
+                <div class="card-title">📝 人格解读</div>
                 <div class="result-description" id="resultDescription"></div>
             </div>
 
             <div class="result-card">
-                <div class="card-title">
-                    <span class="card-title-icon">✨</span>
-                    核心特质
-                </div>
+                <div class="card-title">✨ 核心特质</div>
                 <div class="traits-grid" id="traitsContainer"></div>
             </div>
+
+            <div class="result-card">
+                <div class="card-title">🔍 行为分析</div>
+                <div class="behavior-analysis" id="behaviorAnalysis"></div>
+            </div>
             
-            <div class="radar-section">
-                <div class="card-title" style="justify-content: center;">
-                    <span class="card-title-icon">📊</span>
-                    四维度分析
-                </div>
-                <div class="radar-wrapper">
-                    <canvas id="radarChart"></canvas>
-                </div>
+            <div class="dna-section">
+                <div class="card-title" style="justify-content: center;">🧬 美食DNA图谱</div>
+                <div class="dna-chart" id="dnaChart"></div>
                 <div class="dimension-explanations" id="dimensionExplanations"></div>
             </div>
             
             <div class="share-section">
                 <div class="share-title">分享给好友，看看他们的食物人格</div>
                 <div class="share-buttons">
-                    <button class="share-btn wechat" onclick="shareToWechat()">
-                        <span class="btn-icon">💬</span>
-                        微信
-                    </button>
-                    <button class="share-btn weibo" onclick="shareToWeibo()">
-                        <span class="btn-icon">📢</span>
-                        微博
-                    </button>
-                    <button class="share-btn copy" onclick="copyResult()">
-                        <span class="btn-icon">📋</span>
-                        复制结果
-                    </button>
+                    <button class="share-btn wechat" onclick="shareToWechat()">💬 微信</button>
+                    <button class="share-btn weibo" onclick="shareToWeibo()">📢 微博</button>
+                    <button class="share-btn link" onclick="copyShareLink()">🔗 复制链接</button>
                 </div>
             </div>
             
             <button class="restart-btn" onclick="restartTest()">重新测试</button>
-            
-            <div class="footer">
-                <p>FoodTI 食物人格测试 · 发现你的美食DNA</p>
-            </div>
         </div>
-    </div>
 
-    <div class="loading" id="loading">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">正在分析你的食物人格...</div>
+        <!-- 历史页 -->
+        <div class="history-page" id="historyPage">
+            <div class="history-header">
+                <button class="back-btn" onclick="backToHome()">←</button>
+                <div class="history-title">历史记录</div>
+                <div></div>
+            </div>
+            <div class="history-list" id="historyList"></div>
+        </div>
     </div>
 
     <div class="toast" id="toast"></div>
 
     <script>
-        // 题库 - 每个维度10+道题，共40+道
+        // 人格SVG头像
+        const avatarSVGs = {
+            "explorer": `<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="#FFE4CC"/><circle cx="40" cy="32" r="16" fill="#FFB380"/><path d="M24 28 L32 20 L36 26 Z" fill="#E8652B"/><path d="M56 28 L48 20 L44 26 Z" fill="#E8652B"/><circle cx="34" cy="30" r="3" fill="#2D1810"/><circle cx="46" cy="30" r="3" fill="#2D1810"/><path d="M35 38 Q40 44 45 38" stroke="#E8652B" stroke-width="2" fill="none"/><path d="M20 50 Q40 65 60 50" fill="#FF8C42"/><circle cx="28" cy="55" r="4" fill="#FFB347"/><circle cx="52" cy="55" r="4" fill="#FFB347"/><path d="M36 52 L40 48 L44 52" fill="#E8652B"/></svg>`,
+            "calculator": `<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="#E8F5E9"/><circle cx="40" cy="32" r="16" fill="#A5D6A7"/><rect x="28" y="18" width="24" height="8" rx="4" fill="#66BB6A"/><circle cx="34" cy="30" r="2.5" fill="#2D1810"/><circle cx="46" cy="30" r="2.5" fill="#2D1810"/><rect x="36" y="36" width="8" height="4" rx="2" fill="#2D1810"/><path d="M25 55 L55 55 L55 70 L25 70 Z" fill="#66BB6A"/><rect x="30" y="58" width="6" height="4" rx="1" fill="white"/><rect x="44" y="58" width="6" height="4" rx="1" fill="white"/></svg>`,
+            "social": `<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="#FFF3E0"/><circle cx="40" cy="32" r="16" fill="#FFB74D"/><circle cx="34" cy="28" r="3" fill="#2D1810"/><circle cx="46" cy="28" r="3" fill="#2D1810"/><path d="M32 36 Q40 44 48 36" stroke="#E8652B" stroke-width="2.5" fill="none"/><path d="M20 52 Q40 68 60 52" fill="#FF8C42"/><circle cx="30" cy="58" r="3" fill="#FFB347"/><circle cx="50" cy="58" r="3" fill="#FFB347"/><path d="M15 35 L22 28" stroke="#FF8C42" stroke-width="2"/><circle cx="13" cy="37" r="4" fill="#FFB347"/></svg>`,
+            "slow": `<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="#F3E5F5"/><circle cx="40" cy="32" r="16" fill="#CE93D8"/><circle cx="34" cy="30" r="2.5" fill="#2D1810"/><circle cx="46" cy="30" r="2.5" fill="#2D1810"/><path d="M36 38 Q40 42 44 38" stroke="#7B1FA2" stroke-width="2" fill="none"/><path d="M22 50 Q40 66 58 50" fill="#AB47BC"/><ellipse cx="40" cy="56" rx="8" ry="4" fill="#CE93D8"/><path d="M35 50 L40 46 L45 50" fill="#7B1FA2"/></svg>`,
+            "lone": `<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="#E3F2FD"/><circle cx="40" cy="32" r="16" fill="#90CAF9"/><path d="M30 24 L40 16 L50 24" fill="#42A5F5"/><circle cx="34" cy="30" r="2.5" fill="#2D1810"/><circle cx="46" cy="30" r="2.5" fill="#2D1810"/><line x1="36" y1="38" x2="44" y2="38" stroke="#1565C0" stroke-width="2"/><path d="M22 50 Q40 65 58 50" fill="#42A5F5"/><circle cx="40" cy="52" r="5" fill="#90CAF9"/></svg>`,
+            "casual": `<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="#FFF8E1"/><circle cx="40" cy="32" r="16" fill="#FFD54F"/><circle cx="34" cy="30" r="3" fill="#2D1810"/><circle cx="46" cy="30" r="3" fill="#2D1810"/><path d="M34 38 Q40 44 46 38" stroke="#F57F17" stroke-width="2" fill="none"/><path d="M22 52 Q40 66 58 52" fill="#FFB300"/><ellipse cx="40" cy="58" rx="10" ry="5" fill="#FFD54F"/></svg>`,
+            "fast": `<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="#FFEBEE"/><circle cx="40" cy="32" r="16" fill="#EF9A9A"/><path d="M30 20 L35 28 L25 28 Z" fill="#E53935"/><path d="M50 20 L55 28 L45 28 Z" fill="#E53935"/><circle cx="34" cy="30" r="2.5" fill="#2D1810"/><circle cx="46" cy="30" r="2.5" fill="#2D1810"/><line x1="34" y1="38" x2="46" y2="38" stroke="#C62828" stroke-width="2"/><path d="M20 50 Q40 65 60 50" fill="#EF5350"/><path d="M55 35 L65 30 L65 40 Z" fill="#FFD600"/></svg>`,
+            "home": `<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="#E8F5E9"/><circle cx="40" cy="32" r="16" fill="#81C784"/><circle cx="34" cy="30" r="2.5" fill="#2D1810"/><circle cx="46" cy="30" r="2.5" fill="#2D1810"/><path d="M34 38 Q40 44 46 38" stroke="#2E7D32" stroke-width="2" fill="none"/><path d="M20 50 Q40 66 60 50" fill="#4CAF50"/><path d="M30 55 L40 48 L50 55" fill="#388E3C"/><rect x="36" y="55" width="8" height="8" fill="#81C784"/></svg>`
+        };
+
+        // 题库 - 每个维度10道题，4个选项
         const questionBank = [
             // ========== 冒险度 vs 安全感 (AS) ==========
             {
-                dimension: "AS",
-                dimensionName: "冒险度",
+                dimension: "AS", dimensionName: "冒险度",
                 question: "周末聚餐，你会选择哪种餐厅？",
                 options: [
-                    { text: "新开的异国料理店，试试没吃过的菜系", value: "A" },
-                    { text: "常去的老店，熟悉的味道让人安心", value: "S" }
+                    { text: "新开的异国料理店，试试没吃过的", scores: { A: 3, S: 0 } },
+                    { text: "朋友推荐的新店，值得一试", scores: { A: 2, S: 1 } },
+                    { text: "常去的老店，熟悉的味道", scores: { A: 1, S: 2 } },
+                    { text: "家里做饭，最安心", scores: { A: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "AS",
-                dimensionName: "冒险度",
+                dimension: "AS", dimensionName: "冒险度",
                 question: "面对一道从未见过的菜，你会？",
                 options: [
-                    { text: "太好了！必须尝尝鲜！", value: "A" },
-                    { text: "先问问是什么做的，再决定要不要试", value: "S" }
+                    { text: "太好了！必须尝尝鲜！", scores: { A: 3, S: 0 } },
+                    { text: "看起来不错，可以试试", scores: { A: 2, S: 1 } },
+                    { text: "先问问是什么做的", scores: { A: 1, S: 2 } },
+                    { text: "算了，还是吃熟悉的", scores: { A: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "AS",
-                dimensionName: "冒险度",
-                question: "你的冰箱通常是？",
-                options: [
-                    { text: "塞满各种新奇食材，随时准备尝试新菜", value: "A" },
-                    { text: "固定几样常用食材，简单规律", value: "S" }
-                ]
-            },
-            {
-                dimension: "AS",
-                dimensionName: "冒险度",
+                dimension: "AS", dimensionName: "冒险度",
                 question: "旅行时，你会如何选择餐厅？",
                 options: [
-                    { text: "专门找当地人去的小店，体验地道风味", value: "A" },
-                    { text: "选择评分高的连锁餐厅，品质有保障", value: "S" }
+                    { text: "专门找当地人去的小店", scores: { A: 3, S: 0 } },
+                    { text: "看哪家顺眼就进哪家", scores: { A: 2, S: 1 } },
+                    { text: "选择评分高的餐厅", scores: { A: 1, S: 2 } },
+                    { text: "找连锁餐厅，品质有保障", scores: { A: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "AS",
-                dimensionName: "冒险度",
-                question: "如果开一家餐厅，你会？",
-                options: [
-                    { text: "做融合创意菜，不断推陈出新", value: "A" },
-                    { text: "做经典家常菜，把传统味道做到极致", value: "S" }
-                ]
-            },
-            {
-                dimension: "AS",
-                dimensionName: "冒险度",
-                question: "朋友推荐一家'黑暗料理'店，你会？",
-                options: [
-                    { text: "太有意思了！马上就去打卡", value: "A" },
-                    { text: "还是算了，听名字就不太敢尝试", value: "S" }
-                ]
-            },
-            {
-                dimension: "AS",
-                dimensionName: "冒险度",
+                dimension: "AS", dimensionName: "冒险度",
                 question: "超市里看到进口零食区，你会？",
                 options: [
-                    { text: "每样都想买来尝尝，管它好不好吃", value: "A" },
-                    { text: "只买认识的品牌，不想踩雷", value: "S" }
+                    { text: "每样都想买来尝尝", scores: { A: 3, S: 0 } },
+                    { text: "挑几个感兴趣的试试", scores: { A: 2, S: 1 } },
+                    { text: "只买认识的品牌", scores: { A: 1, S: 2 } },
+                    { text: "直接跳过，不感兴趣", scores: { A: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "AS",
-                dimensionName: "冒险度",
+                dimension: "AS", dimensionName: "冒险度",
+                question: "朋友推荐一家'黑暗料理'店，你会？",
+                options: [
+                    { text: "太有意思了！马上就去", scores: { A: 3, S: 0 } },
+                    { text: "听起来有趣，可以试试", scores: { A: 2, S: 1 } },
+                    { text: "等别人先去试试再说", scores: { A: 1, S: 2 } },
+                    { text: "还是算了，不太敢尝试", scores: { A: 0, S: 3 } }
+                ]
+            },
+            {
+                dimension: "AS", dimensionName: "冒险度",
                 question: "做饭时发现少了一种调料，你会？",
                 options: [
-                    { text: "试试用其他调料替代，说不定有惊喜", value: "A" },
-                    { text: "下楼买或者换一道菜做", value: "S" }
+                    { text: "试试用其他调料替代", scores: { A: 3, S: 0 } },
+                    { text: "少放一点，应该影响不大", scores: { A: 2, S: 1 } },
+                    { text: "下楼去买", scores: { A: 1, S: 2 } },
+                    { text: "换一道菜做", scores: { A: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "AS",
-                dimensionName: "冒险度",
+                dimension: "AS", dimensionName: "冒险度",
                 question: "对于网红餐厅，你的态度是？",
                 options: [
-                    { text: "一定要去试试，不管好不好吃都要体验", value: "A" },
-                    { text: "等热度过去看看真实评价再说", value: "S" }
+                    { text: "一定要去打卡体验", scores: { A: 3, S: 0 } },
+                    { text: "热度过去后去看看", scores: { A: 2, S: 1 } },
+                    { text: "看看真实评价再决定", scores: { A: 1, S: 2 } },
+                    { text: "不太相信营销，不会去", scores: { A: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "AS",
-                dimensionName: "冒险度",
-                question: "别人请你吃一道'神秘菜品'，不告诉你是啥，你会？",
+                dimension: "AS", dimensionName: "冒险度",
+                question: "别人请你吃一道'神秘菜品'，你会？",
                 options: [
-                    { text: "闭眼就吃，开盲盒的感觉真好", value: "A" },
-                    { text: "必须先问清楚，不然不敢下口", value: "S" }
+                    { text: "闭眼就吃，开盲盒的感觉", scores: { A: 3, S: 0 } },
+                    { text: "先尝一小口试试", scores: { A: 2, S: 1 } },
+                    { text: "必须先问清楚是什么", scores: { A: 1, S: 2 } },
+                    { text: "不确定就不吃了", scores: { A: 0, S: 3 } }
+                ]
+            },
+            {
+                dimension: "AS", dimensionName: "冒险度",
+                question: "你的冰箱通常是？",
+                options: [
+                    { text: "塞满各种新奇食材", scores: { A: 3, S: 0 } },
+                    { text: "有一些尝试性的食材", scores: { A: 2, S: 1 } },
+                    { text: "固定几样常用食材", scores: { A: 1, S: 2 } },
+                    { text: "只有最基本的几样", scores: { A: 0, S: 3 } }
+                ]
+            },
+            {
+                dimension: "AS", dimensionName: "冒险度",
+                question: "如果开一家餐厅，你会？",
+                options: [
+                    { text: "做融合创意菜，不断推新", scores: { A: 3, S: 0 } },
+                    { text: "做特色菜，有自己的风格", scores: { A: 2, S: 1 } },
+                    { text: "做经典菜，把传统做好", scores: { A: 1, S: 2 } },
+                    { text: "做家常菜，简单实惠", scores: { A: 0, S: 3 } }
                 ]
             },
 
             // ========== 过程型 vs 结果型 (PO) ==========
             {
-                dimension: "PO",
-                dimensionName: "过程型",
+                dimension: "PO", dimensionName: "过程型",
                 question: "做饭时，你更享受哪个部分？",
                 options: [
-                    { text: "研究菜谱、准备食材、烹饪的过程", value: "P" },
-                    { text: "快速搞定，享受美味的结果", value: "O" }
+                    { text: "研究菜谱、准备食材的过程", scores: { P: 3, O: 0 } },
+                    { text: "烹饪的过程，看食材变化", scores: { P: 2, O: 1 } },
+                    { text: "快速搞定，享受结果", scores: { P: 1, O: 2 } },
+                    { text: "直接点外卖最省事", scores: { P: 0, O: 3 } }
                 ]
             },
             {
-                dimension: "PO",
-                dimensionName: "过程型",
+                dimension: "PO", dimensionName: "过程型",
                 question: "对于食谱，你的态度是？",
                 options: [
-                    { text: "严格按步骤来，每一步都很重要", value: "P" },
-                    { text: "大概看看，凭感觉自由发挥", value: "O" }
+                    { text: "严格按步骤来，每步都重要", scores: { P: 3, O: 0 } },
+                    { text: "参考一下，适当调整", scores: { P: 2, O: 1 } },
+                    { text: "大概看看，凭感觉做", scores: { P: 1, O: 2 } },
+                    { text: "从不看食谱，自由发挥", scores: { P: 0, O: 3 } }
                 ]
             },
             {
-                dimension: "PO",
-                dimensionName: "过程型",
-                question: "你认为美食的意义在于？",
-                options: [
-                    { text: "烹饪和品尝的过程本身就是享受", value: "P" },
-                    { text: "带来的饱腹感和满足感", value: "O" }
-                ]
-            },
-            {
-                dimension: "PO",
-                dimensionName: "过程型",
+                dimension: "PO", dimensionName: "过程型",
                 question: "做一道复杂的菜，你会？",
                 options: [
-                    { text: "花几个小时慢慢做，享受每个步骤", value: "P" },
-                    { text: "找简单的替代方案，能吃就行", value: "O" }
+                    { text: "花几小时慢慢做，享受过程", scores: { P: 3, O: 0 } },
+                    { text: "认真做，但会提高效率", scores: { P: 2, O: 1 } },
+                    { text: "找简单的替代方案", scores: { P: 1, O: 2 } },
+                    { text: "直接买现成的", scores: { P: 0, O: 3 } }
                 ]
             },
             {
-                dimension: "PO",
-                dimensionName: "过程型",
+                dimension: "PO", dimensionName: "过程型",
                 question: "烘焙蛋糕时，你更在意？",
                 options: [
-                    { text: "搅拌、打发、烘烤的过程很治愈", value: "P" },
-                    { text: "最后的成品好不好看、好不好吃", value: "O" }
+                    { text: "搅拌、打发、烘烤的过程", scores: { P: 3, O: 0 } },
+                    { text: "每一步都做到位", scores: { P: 2, O: 1 } },
+                    { text: "最终成品好不好看", scores: { P: 1, O: 2 } },
+                    { text: "好不好吃最重要", scores: { P: 0, O: 3 } }
                 ]
             },
             {
-                dimension: "PO",
-                dimensionName: "过程型",
+                dimension: "PO", dimensionName: "过程型",
                 question: "周末做饭，你通常会？",
                 options: [
-                    { text: "花一上午慢慢准备，享受厨房时光", value: "P" },
-                    { text: "点外卖或者做简单的速食", value: "O" }
+                    { text: "花一上午慢慢准备", scores: { P: 3, O: 0 } },
+                    { text: "认真做一顿饭", scores: { P: 2, O: 1 } },
+                    { text: "做简单的快手菜", scores: { P: 1, O: 2 } },
+                    { text: "点外卖或吃速食", scores: { P: 0, O: 3 } }
                 ]
             },
             {
-                dimension: "PO",
-                dimensionName: "过程型",
+                dimension: "PO", dimensionName: "过程型",
                 question: "一道菜做失败了，你会？",
                 options: [
-                    { text: "分析哪里出了问题，下次改进", value: "P" },
-                    { text: "直接倒掉，重新做或者叫外卖", value: "O" }
+                    { text: "分析问题，下次改进", scores: { P: 3, O: 0 } },
+                    { text: "总结经验，继续做", scores: { P: 2, O: 1 } },
+                    { text: "有点沮丧，重新做", scores: { P: 1, O: 2 } },
+                    { text: "直接倒掉，叫外卖", scores: { P: 0, O: 3 } }
                 ]
             },
             {
-                dimension: "PO",
-                dimensionName: "过程型",
+                dimension: "PO", dimensionName: "过程型",
                 question: "你更喜欢哪种厨房工具？",
                 options: [
-                    { text: "各种专业厨具，每种都有独特用途", value: "P" },
-                    { text: "多功能料理机，一机搞定所有", value: "O" }
+                    { text: "各种专业厨具，各有用途", scores: { P: 3, O: 0 } },
+                    { text: "常用的几样好工具", scores: { P: 2, O: 1 } },
+                    { text: "多功能料理机", scores: { P: 1, O: 2 } },
+                    { text: "能用就行，不太讲究", scores: { P: 0, O: 3 } }
                 ]
             },
             {
-                dimension: "PO",
-                dimensionName: "过程型",
+                dimension: "PO", dimensionName: "过程型",
                 question: "看美食节目时，你更关注？",
                 options: [
-                    { text: "烹饪技巧和步骤，学以致用", value: "P" },
-                    { text: "最终成品，看着好吃就行", value: "O" }
+                    { text: "烹饪技巧和步骤", scores: { P: 3, O: 0 } },
+                    { text: "食材搭配和处理", scores: { P: 2, O: 1 } },
+                    { text: "最终成品的样子", scores: { P: 1, O: 2 } },
+                    { text: "看看就好，不会学", scores: { P: 0, O: 3 } }
                 ]
             },
             {
-                dimension: "PO",
-                dimensionName: "过程型",
+                dimension: "PO", dimensionName: "过程型",
+                question: "你认为美食的意义在于？",
+                options: [
+                    { text: "烹饪和品尝的过程", scores: { P: 3, O: 0 } },
+                    { text: "创造美味的成就感", scores: { P: 2, O: 1 } },
+                    { text: "带来的满足感", scores: { P: 1, O: 2 } },
+                    { text: "填饱肚子就好", scores: { P: 0, O: 3 } }
+                ]
+            },
+            {
+                dimension: "PO", dimensionName: "过程型",
                 question: "准备一顿晚餐，你觉得什么最重要？",
                 options: [
-                    { text: "准备过程中的仪式感和乐趣", value: "P" },
-                    { text: "快速高效地做出美味", value: "O" }
+                    { text: "准备过程中的仪式感", scores: { P: 3, O: 0 } },
+                    { text: "用心准备每一道菜", scores: { P: 2, O: 1 } },
+                    { text: "快速高效地完成", scores: { P: 1, O: 2 } },
+                    { text: "能吃就行", scores: { P: 0, O: 3 } }
                 ]
             },
 
             // ========== 共享型 vs 独享型 (GS) ==========
             {
-                dimension: "GS",
-                dimensionName: "共享型",
+                dimension: "GS", dimensionName: "共享型",
                 question: "发现一家超好吃的店，你会？",
                 options: [
-                    { text: "马上发朋友圈，约朋友一起去", value: "G" },
-                    { text: "自己先收藏，找机会独自去", value: "S" }
+                    { text: "马上发朋友圈，约朋友去", scores: { G: 3, S: 0 } },
+                    { text: "告诉几个好朋友", scores: { G: 2, S: 1 } },
+                    { text: "自己先收藏，有空再去", scores: { G: 1, S: 2 } },
+                    { text: "默默记在心里", scores: { G: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "GS",
-                dimensionName: "共享型",
-                question: "收到别人分享的美食，你会？",
-                options: [
-                    { text: "开心接受，下次也分享给他", value: "G" },
-                    { text: "礼貌感谢，但不太习惯这种互动", value: "S" }
-                ]
-            },
-            {
-                dimension: "GS",
-                dimensionName: "共享型",
-                question: "野餐或烧烤时，你通常？",
-                options: [
-                    { text: "主动组织，带很多食物分享给大家", value: "G" },
-                    { text: "带自己那份就好，不太操心别人", value: "S" }
-                ]
-            },
-            {
-                dimension: "GS",
-                dimensionName: "共享型",
-                question: "最后一块蛋糕，你会？",
-                options: [
-                    { text: "切成小块，大家一起分享", value: "G" },
-                    { text: "留给自己，或者让给最想吃的人", value: "S" }
-                ]
-            },
-            {
-                dimension: "GS",
-                dimensionName: "共享型",
+                dimension: "GS", dimensionName: "共享型",
                 question: "你更喜欢哪种用餐方式？",
                 options: [
-                    { text: "和朋友一起点很多菜，大家分着吃", value: "G" },
-                    { text: "自己点自己的，吃自己想吃的", value: "S" }
+                    { text: "和朋友点很多菜分着吃", scores: { G: 3, S: 0 } },
+                    { text: "和熟悉的人一起吃", scores: { G: 2, S: 1 } },
+                    { text: "自己点自己的", scores: { G: 1, S: 2 } },
+                    { text: "一个人吃饭更自在", scores: { G: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "GS",
-                dimensionName: "共享型",
+                dimension: "GS", dimensionName: "共享型",
+                question: "野餐或烧烤时，你通常？",
+                options: [
+                    { text: "主动组织，带很多食物分享", scores: { G: 3, S: 0 } },
+                    { text: "带够自己和朋友的份", scores: { G: 2, S: 1 } },
+                    { text: "带自己那份就好", scores: { G: 1, S: 2 } },
+                    { text: "别人带什么我就吃什么", scores: { G: 0, S: 3 } }
+                ]
+            },
+            {
+                dimension: "GS", dimensionName: "共享型",
+                question: "最后一块蛋糕，你会？",
+                options: [
+                    { text: "切成小块大家分享", scores: { G: 3, S: 0 } },
+                    { text: "让给最想吃的人", scores: { G: 2, S: 1 } },
+                    { text: "问问有没有人要", scores: { G: 1, S: 2 } },
+                    { text: "自己吃了", scores: { G: 0, S: 3 } }
+                ]
+            },
+            {
+                dimension: "GS", dimensionName: "共享型",
                 question: "在餐厅吃到好吃的菜，你会？",
                 options: [
-                    { text: "马上叫服务员再点一份给大家尝尝", value: "G" },
-                    { text: "自己多吃几口，这是我的最爱", value: "S" }
+                    { text: "马上叫大家尝尝", scores: { G: 3, S: 0 } },
+                    { text: "推荐给同桌的人", scores: { G: 2, S: 1 } },
+                    { text: "自己多吃几口", scores: { G: 1, S: 2 } },
+                    { text: "默默享受", scores: { G: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "GS",
-                dimensionName: "共享型",
+                dimension: "GS", dimensionName: "共享型",
                 question: "朋友聚餐时，你通常？",
                 options: [
-                    { text: "主动帮大家点菜、分菜、活跃气氛", value: "G" },
-                    { text: "安静吃自己的，偶尔聊几句", value: "S" }
+                    { text: "主动帮大家点菜、活跃气氛", scores: { G: 3, S: 0 } },
+                    { text: "参与讨论，提供建议", scores: { G: 2, S: 1 } },
+                    { text: "点自己想吃的", scores: { G: 1, S: 2 } },
+                    { text: "安静吃自己的", scores: { G: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "GS",
-                dimensionName: "共享型",
+                dimension: "GS", dimensionName: "共享型",
                 question: "你会把自己的食谱分享给别人吗？",
                 options: [
-                    { text: "当然！好东西要大家一起分享", value: "G" },
-                    { text: "这是我的独家秘方，不太想分享", value: "S" }
+                    { text: "当然！好东西要分享", scores: { G: 3, S: 0 } },
+                    { text: "会分享给好朋友", scores: { G: 2, S: 1 } },
+                    { text: "看情况，不太主动", scores: { G: 1, S: 2 } },
+                    { text: "这是我的独家秘方", scores: { G: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "GS",
-                dimensionName: "共享型",
+                dimension: "GS", dimensionName: "共享型",
                 question: "公司下午茶，你会？",
                 options: [
-                    { text: "主动点单，照顾每个人的口味", value: "G" },
-                    { text: "点自己想吃的就好", value: "S" }
+                    { text: "主动点单，照顾每个人", scores: { G: 3, S: 0 } },
+                    { text: "和同事一起商量", scores: { G: 2, S: 1 } },
+                    { text: "点自己想吃的", scores: { G: 1, S: 2 } },
+                    { text: "让别人点就好", scores: { G: 0, S: 3 } }
                 ]
             },
             {
-                dimension: "GS",
-                dimensionName: "共享型",
+                dimension: "GS", dimensionName: "共享型",
                 question: "你如何看待'AA制'聚餐？",
                 options: [
-                    { text: "我更喜欢请客，大家一起开心最重要", value: "G" },
-                    { text: "AA制挺好，各付各的更轻松", value: "S" }
+                    { text: "我更喜欢请客", scores: { G: 3, S: 0 } },
+                    { text: "轮流请客比较好", scores: { G: 2, S: 1 } },
+                    { text: "AA制挺好，公平", scores: { G: 1, S: 2 } },
+                    { text: "各付各的最轻松", scores: { G: 0, S: 3 } }
+                ]
+            },
+            {
+                dimension: "GS", dimensionName: "共享型",
+                question: "收到别人分享的美食，你会？",
+                options: [
+                    { text: "开心接受，下次也分享", scores: { G: 3, S: 0 } },
+                    { text: "感谢，会找机会回礼", scores: { G: 2, S: 1 } },
+                    { text: "礼貌感谢", scores: { G: 1, S: 2 } },
+                    { text: "不太习惯这种互动", scores: { G: 0, S: 3 } }
                 ]
             },
 
             // ========== 直觉型 vs 分析型 (IA) ==========
             {
-                dimension: "IA",
-                dimensionName: "直觉型",
+                dimension: "IA", dimensionName: "直觉型",
                 question: "点外卖时，你通常会？",
                 options: [
-                    { text: "凭感觉选，看着顺眼就点", value: "I" },
-                    { text: "仔细看评分、评论，对比多家再决定", value: "A" }
+                    { text: "凭感觉选，看着顺眼就点", scores: { I: 3, A: 0 } },
+                    { text: "看看图片，选好看的", scores: { I: 2, A: 1 } },
+                    { text: "看看评分和评论", scores: { I: 1, A: 2 } },
+                    { text: "仔细对比价格和评价", scores: { I: 0, A: 3 } }
                 ]
             },
             {
-                dimension: "IA",
-                dimensionName: "直觉型",
+                dimension: "IA", dimensionName: "直觉型",
                 question: "选择餐厅时，你更依赖？",
                 options: [
-                    { text: "直觉和氛围，走进去感觉对就行", value: "I" },
-                    { text: "大众点评评分和朋友推荐", value: "A" }
+                    { text: "直觉和氛围，感觉对就行", scores: { I: 3, A: 0 } },
+                    { text: "朋友的推荐", scores: { I: 2, A: 1 } },
+                    { text: "大众点评评分", scores: { I: 1, A: 2 } },
+                    { text: "综合评分、价格、距离", scores: { I: 0, A: 3 } }
                 ]
             },
             {
-                dimension: "IA",
-                dimensionName: "直觉型",
+                dimension: "IA", dimensionName: "直觉型",
                 question: "买食材时，你更看重？",
                 options: [
-                    { text: "看着新鲜就行，不太看标签", value: "I" },
-                    { text: "仔细看保质期、成分表、产地", value: "A" }
+                    { text: "看着新鲜就行", scores: { I: 3, A: 0 } },
+                    { text: "凭经验挑选", scores: { I: 2, A: 1 } },
+                    { text: "看看保质期", scores: { I: 1, A: 2 } },
+                    { text: "仔细看成分表和产地", scores: { I: 0, A: 3 } }
                 ]
             },
             {
-                dimension: "IA",
-                dimensionName: "直觉型",
+                dimension: "IA", dimensionName: "直觉型",
                 question: "判断一道菜好不好吃，你通常？",
                 options: [
-                    { text: "第一口就知道，跟着感觉走", value: "I" },
-                    { text: "从色香味多个方面综合评判", value: "A" }
+                    { text: "第一口就知道", scores: { I: 3, A: 0 } },
+                    { text: "凭感觉判断", scores: { I: 2, A: 1 } },
+                    { text: "从色香味评判", scores: { I: 1, A: 2 } },
+                    { text: "综合多个方面分析", scores: { I: 0, A: 3 } }
                 ]
             },
             {
-                dimension: "IA",
-                dimensionName: "直觉型",
-                question: "选择红酒时，你会？",
-                options: [
-                    { text: "看酒标顺眼就买，或者问店员推荐", value: "I" },
-                    { text: "研究产区、年份、葡萄品种再决定", value: "A" }
-                ]
-            },
-            {
-                dimension: "IA",
-                dimensionName: "直觉型",
+                dimension: "IA", dimensionName: "直觉型",
                 question: "做饭放调料时，你通常？",
                 options: [
-                    { text: "凭手感和经验，差不多就行", value: "I" },
-                    { text: "严格按照菜谱的克数来", value: "A" }
+                    { text: "凭手感，差不多就行", scores: { I: 3, A: 0 } },
+                    { text: "凭经验放", scores: { I: 2, A: 1 } },
+                    { text: "大概量一下", scores: { I: 1, A: 2 } },
+                    { text: "严格按照菜谱克数", scores: { I: 0, A: 3 } }
                 ]
             },
             {
-                dimension: "IA",
-                dimensionName: "直觉型",
+                dimension: "IA", dimensionName: "直觉型",
                 question: "评价一家餐厅，你更看重？",
                 options: [
-                    { text: "整体感觉和用餐体验", value: "I" },
-                    { text: "菜品质量、服务评分、性价比等数据", value: "A" }
+                    { text: "整体感觉和体验", scores: { I: 3, A: 0 } },
+                    { text: "菜品的味道", scores: { I: 2, A: 1 } },
+                    { text: "服务和环境", scores: { I: 1, A: 2 } },
+                    { text: "综合性价比数据", scores: { I: 0, A: 3 } }
                 ]
             },
             {
-                dimension: "IA",
-                dimensionName: "直觉型",
+                dimension: "IA", dimensionName: "直觉型",
                 question: "选购水果时，你会？",
                 options: [
-                    { text: "看颜色和手感，凭经验挑选", value: "I" },
-                    { text: "看产地、品种、成熟度等信息", value: "A" }
+                    { text: "看颜色和手感", scores: { I: 3, A: 0 } },
+                    { text: "凭经验挑选", scores: { I: 2, A: 1 } },
+                    { text: "看看品种和产地", scores: { I: 1, A: 2 } },
+                    { text: "研究成熟度和口感", scores: { I: 0, A: 3 } }
                 ]
             },
             {
-                dimension: "IA",
-                dimensionName: "直觉型",
+                dimension: "IA", dimensionName: "直觉型",
                 question: "尝试新餐厅前，你会？",
                 options: [
-                    { text: "直接去，到了再看菜单决定", value: "I" },
-                    { text: "提前在网上研究菜单和评价", value: "A" }
+                    { text: "直接去，到了再看", scores: { I: 3, A: 0 } },
+                    { text: "看看位置和环境", scores: { I: 2, A: 1 } },
+                    { text: "提前看看菜单", scores: { I: 1, A: 2 } },
+                    { text: "详细研究评价和菜品", scores: { I: 0, A: 3 } }
                 ]
             },
             {
-                dimension: "IA",
-                dimensionName: "直觉型",
+                dimension: "IA", dimensionName: "直觉型",
                 question: "对于食物的热量，你通常？",
                 options: [
-                    { text: "不太在意，好吃就行", value: "I" },
-                    { text: "会关注热量表，控制摄入", value: "A" }
+                    { text: "不太在意，好吃就行", scores: { I: 3, A: 0 } },
+                    { text: "偶尔会想一下", scores: { I: 2, A: 1 } },
+                    { text: "会大致估算", scores: { I: 1, A: 2 } },
+                    { text: "会关注热量表", scores: { I: 0, A: 3 } }
+                ]
+            },
+            {
+                dimension: "IA", dimensionName: "直觉型",
+                question: "选择红酒时，你会？",
+                options: [
+                    { text: "看酒标顺眼就买", scores: { I: 3, A: 0 } },
+                    { text: "问店员推荐", scores: { I: 2, A: 1 } },
+                    { text: "看看产区和年份", scores: { I: 1, A: 2 } },
+                    { text: "研究葡萄品种和评分", scores: { I: 0, A: 3 } }
                 ]
             }
         ];
 
-        // 人格类型数据
+        // 16种人格类型
         const personalityTypes = {
             "APGI": {
-                name: "美食探险家",
-                englishName: "FOOD EXPLORER",
-                emoji: "🧭",
-                description: "你是天生的美食探险家！对你来说，食物不只是填饱肚子，更是探索世界的窗口。你热衷于尝试新奇的料理，享受烹饪的创意过程，喜欢和朋友分享新发现的美食。你的味蕾永远在期待下一次冒险！你可能是朋友圈里的美食KOL，大家都会参考你的推荐。",
-                traits: ["勇于尝试新事物", "创意烹饪达人", "乐于分享美食", "直觉敏锐", "热爱探索", "社交活跃"]
+                name: "美食探险家", englishName: "FOOD EXPLORER", avatar: "explorer",
+                description: "你是天生的美食探险家！对你来说，食物不只是填饱肚子，更是探索世界的窗口。你热衷于尝试新奇的料理，享受烹饪的创意过程，喜欢和朋友分享新发现的美食。你的味蕾永远在期待下一次冒险！",
+                traits: ["勇于尝试", "创意烹饪", "乐于分享", "直觉敏锐"],
+                behavior: {
+                    dining: "喜欢尝试新餐厅，每周至少探索一家新店",
+                    cooking: "热衷创意料理，经常即兴发挥",
+                    social: "朋友圈的美食KOL，经常组织聚餐",
+                    shopping: "喜欢逛进口超市和特色食材店"
+                }
             },
-            "SOSA": {
-                name: "营养计算器",
-                englishName: "CALORIE COUNTER",
-                emoji: "🧮",
-                description: "你是理性的营养计算器！你对食物有着科学的态度，注重营养搭配和热量控制。你习惯看配料表，选择有据可依的餐厅。你可能是健身达人或者注重健康的人，你的饮食习惯让身体更健康。虽然看起来很较真，但这是你对自己和健康负责的方式。",
-                traits: ["理性选择食物", "注重营养健康", "计划性强", "数据驱动决策", "自律性强", "目标导向"]
+            "APGS": {
+                name: "创意分享家", englishName: "CREATIVE SHARER", avatar: "explorer",
+                description: "你是充满创意的分享家！你喜欢尝试新事物，但更注重与他人分享你的发现。你的创意不仅体现在烹饪上，还体现在如何让美食成为社交的纽带。",
+                traits: ["创意十足", "社交活跃", "乐于分享", "善于发现"],
+                behavior: {
+                    dining: "喜欢带朋友去新发现的餐厅",
+                    cooking: "经常举办主题美食派对",
+                    social: "美食分享群的活跃分子",
+                    shopping: "喜欢买可以分享的大份量美食"
+                }
             },
-            "AOGA": {
-                name: "社交食客",
-                englishName: "SOCIAL EATER",
-                emoji: "🎉",
-                description: "你是快乐的社交食客！对你来说，美食最好的调味料是朋友和欢笑。你热衷于组织聚餐、分享美食，在热闹的氛围中享受食物。你的朋友圈总是充满各种美食打卡照片！你是人群中的开心果，总能让聚餐气氛更欢乐。",
-                traits: ["社交达人", "氛围营造者", "乐于组织活动", "结果导向", "热情开朗", "善于分享"]
+            "APOG": {
+                name: "效率美食家", englishName: "EFFICIENT FOODIE", avatar: "fast",
+                description: "你是高效的美食家！你追求新奇的美食体验，但更注重结果。你善于用最高效的方式获得最好的美食体验，是朋友中的美食顾问。",
+                traits: ["效率至上", "追求新奇", "结果导向", "品味独到"],
+                behavior: {
+                    dining: "快速找到最好的餐厅",
+                    cooking: "追求快速但美味的料理",
+                    social: "提供高效的美食建议",
+                    shopping: "精准购买，不浪费时间"
+                }
             },
-            "SPSI": {
-                name: "慢食享受家",
-                englishName: "SLOW FOODIE",
-                emoji: "🍵",
-                description: "你是优雅的慢食享受家！你相信好食物值得等待。你享受亲手烹饪的过程，珍惜独处时的美食时光。对你来说，慢慢品尝一口好菜，比狼吞虎咽更有意义。你可能是美食博主或者烹饪爱好者，对食物有着独特的审美和品味。",
-                traits: ["享受烹饪过程", "品味细腻独到", "独处自在", "直觉敏锐", "审美出众", "慢生活倡导者"]
-            },
-            "APSA": {
-                name: "独行美食家",
-                englishName: "LONE GOURMET",
-                emoji: "🎭",
-                description: "你是特立独行的独行美食家！你有自己独特的美食标准，不在乎别人的评价。你喜欢独自探索美食，享受一个人的味觉冒险。你的美食地图，只有你自己能懂。你可能是米其林餐厅的常客，或者深夜食堂的神秘客人。",
-                traits: ["独立自主", "标准独特", "享受独处", "分析能力强", "品味独到", "不随波逐流"]
+            "APOS": {
+                name: "独行探索者", englishName: "SOLO EXPLORER", avatar: "lone",
+                description: "你是独行的美食探索者！你享受独自探索美食的乐趣，不需要他人的认可。你的美食地图只属于你自己，每一次尝试都是一次私人的冒险。",
+                traits: ["独立自主", "享受独处", "追求新奇", "品味独特"],
+                behavior: {
+                    dining: "喜欢一个人去新餐厅",
+                    cooking: "享受独自烹饪的时光",
+                    social: "偶尔分享，但更享受独享",
+                    shopping: "按自己的节奏挑选食材"
+                }
             },
             "SOGI": {
-                name: "随缘干饭人",
-                englishName: "CASUAL DINER",
-                emoji: "🌾",
-                description: "你是随性的随缘干饭人！你对食物没有太多执念，吃饱就好。你很容易满足，朋友请吃什么就吃什么，从不挑剔。这种随和的态度让你在任何饭局都很受欢迎！你是团队里的润滑剂，总能让聚餐更轻松愉快。",
-                traits: ["随遇而安", "容易满足", "社交随和", "不拘小节", "适应力强", "心态平和"]
+                name: "随缘干饭人", englishName: "CASUAL DINER", avatar: "casual",
+                description: "你是随性的随缘干饭人！你对食物没有太多执念，吃饱就好。你很容易满足，朋友请吃什么就吃什么，从不挑剔。这种随和的态度让你在任何饭局都很受欢迎。",
+                traits: ["随遇而安", "容易满足", "社交随和", "不拘小节"],
+                behavior: {
+                    dining: "吃什么都可以，随大家",
+                    cooking: "能吃饱就行，不讲究",
+                    social: "聚餐的润滑剂，从不挑剔",
+                    shopping: "有什么买什么"
+                }
             },
-            "AOSA": {
-                name: "即食效率派",
-                englishName: "FAST FUEL",
-                emoji: "⚡",
-                description: "你是高效的即食效率派！在你看来，食物主要是燃料，快速补充能量最重要。你偏好快捷方便的饮食方式，不太愿意花太多时间在烹饪上。效率就是你的美食哲学！你可能是职场精英或者创业者，时间对你来说最宝贵。",
-                traits: ["效率至上", "注重结果", "独立决策", "理性选择", "时间管理强", "行动力强"]
+            "SOGS": {
+                name: "温暖陪伴者", englishName: "WARM COMPANION", avatar: "home",
+                description: "你是温暖的陪伴者！你享受和熟悉的人一起用餐的感觉，食物对你来说是维系感情的纽带。你不需要多高级的食物，重要的是和谁一起吃。",
+                traits: ["温暖体贴", "重视陪伴", "随和可亲", "情感丰富"],
+                behavior: {
+                    dining: "喜欢和家人朋友一起吃饭",
+                    cooking: "做的菜总是让人感到温暖",
+                    social: "用心照顾每个人的口味",
+                    shopping: "喜欢买大家分享的食材"
+                }
+            },
+            "SOOG": {
+                name: "务实干饭人", englishName: "PRACTICAL EATER", avatar: "casual",
+                description: "你是务实的干饭人！你对食物的要求很简单：能吃饱、味道不错就行。你不会花太多时间在吃上，但也不会亏待自己。你的生活态度简单而务实。",
+                traits: ["务实简单", "不拘小节", "效率优先", "容易满足"],
+                behavior: {
+                    dining: "快速解决吃饭问题",
+                    cooking: "简单快手菜为主",
+                    social: "不主动组织，但会参加",
+                    shopping: "买必需品，不囤货"
+                }
+            },
+            "SOOS": {
+                name: "独享平静者", englishName: "PEACEFUL SOLO", avatar: "lone",
+                description: "你是享受平静的独享者！你喜欢一个人安静地享用美食，不需要热闹的氛围。对你来说，吃饭是一种放松和自我照顾的方式。",
+                traits: ["享受独处", "内心平静", "自我照顾", "简单生活"],
+                behavior: {
+                    dining: "喜欢一个人吃饭",
+                    cooking: "为自己做简单的饭菜",
+                    social: "很少参加聚餐",
+                    shopping: "买自己喜欢的就好"
+                }
             },
             "SPGI": {
-                name: "温暖家常派",
-                englishName: "HOME COOK",
-                emoji: "🏠",
-                description: "你是温暖的温暖家常派！你最爱的是妈妈的味道和家的感觉。你喜欢在家做饭，享受烹饪带来的温馨感。和家人朋友围坐在一起吃顿家常饭，就是你最大的幸福。你可能是朋友圈里的'厨神'，大家都想来你家蹭饭。",
-                traits: ["热爱烹饪", "注重分享", "温馨治愈", "直觉敏锐", "重视家庭", "用心生活"]
+                name: "温暖家常派", englishName: "HOME COOK", avatar: "home",
+                description: "你是温暖的家常派！你最爱的是妈妈的味道和家的感觉。你喜欢在家做饭，享受烹饪带来的温馨感。和家人朋友围坐在一起吃顿家常饭，就是你最大的幸福。",
+                traits: ["热爱烹饪", "注重分享", "温馨治愈", "直觉敏锐"],
+                behavior: {
+                    dining: "更喜欢在家吃饭",
+                    cooking: "擅长家常菜，味道温暖",
+                    social: "经常邀请朋友来家里吃饭",
+                    shopping: "喜欢逛菜市场"
+                }
+            },
+            "SPGS": {
+                name: "治愈系厨师", englishName: "HEALING CHEF", avatar: "home",
+                description: "你是治愈系的厨师！你用食物治愈自己和他人。你的厨艺可能不是最好的，但你做的菜总能让人感到温暖和安心。你是朋友圈里的'妈妈'角色。",
+                traits: ["治愈人心", "用心烹饪", "关爱他人", "温暖体贴"],
+                behavior: {
+                    dining: "喜欢为别人做饭",
+                    cooking: "做菜充满爱心",
+                    social: "照顾每个人的口味",
+                    shopping: "买新鲜健康的食材"
+                }
+            },
+            "SPOG": {
+                name: "传统守护者", englishName: "TRADITION KEEPER", avatar: "home",
+                description: "你是传统的守护者！你尊重食物的传统和文化，喜欢按照祖传的食谱做菜。对你来说，食物不仅是味觉的享受，更是文化的传承。",
+                traits: ["尊重传统", "注重传承", "认真负责", "有文化底蕴"],
+                behavior: {
+                    dining: "喜欢传统餐厅",
+                    cooking: "严格按照传统食谱",
+                    social: "分享传统美食文化",
+                    shopping: "购买正宗的传统食材"
+                }
+            },
+            "SPOS": {
+                name: "精致独享者", englishName: "REFINED SOLO", avatar: "lone",
+                description: "你是精致的独享者！你享受独自烹饪和品尝美食的过程，不需要他人的陪伴。你对食物有自己独特的标准，追求完美的味觉体验。",
+                traits: ["追求完美", "享受独处", "品味精致", "注重过程"],
+                behavior: {
+                    dining: "喜欢一个人慢慢享用",
+                    cooking: "精心准备每一餐",
+                    social: "偶尔分享，但更享受独享",
+                    shopping: "挑选高品质的食材"
+                }
+            },
+            "AAGI": {
+                name: "数据美食家", englishName: "DATA FOODIE", avatar: "calculator",
+                description: "你是数据驱动的美食家！你用科学的方法选择食物，关注营养成分和热量数据。你相信数据不会说谎，用理性的态度对待每一餐。",
+                traits: ["数据驱动", "理性选择", "注重健康", "科学饮食"],
+                behavior: {
+                    dining: "查看餐厅的评分和评论",
+                    cooking: "严格按照食谱和营养搭配",
+                    social: "分享健康饮食知识",
+                    shopping: "仔细阅读营养标签"
+                }
+            },
+            "AAGS": {
+                name: "社交美食家", englishName: "SOCIAL FOODIE", avatar: "social",
+                description: "你是社交型的美食家！你善于利用美食建立社交关系，喜欢在社交场合中分享美食经验。你的朋友圈总是充满各种美食照片。",
+                traits: ["社交达人", "善于分享", "追求新奇", "分析能力强"],
+                behavior: {
+                    dining: "喜欢社交聚餐",
+                    cooking: "为聚会准备创意料理",
+                    social: "朋友圈美食博主",
+                    shopping: "购买适合分享的美食"
+                }
+            },
+            "AAOG": {
+                name: "效率社交者", englishName: "EFFICIENT SOCIALIZER", avatar: "social",
+                description: "你是高效的社交者！你善于在有限的时间内获得最佳的美食体验，同时维护社交关系。你的时间管理能力和社交能力都很强。",
+                traits: ["效率至上", "社交能力强", "结果导向", "善于规划"],
+                behavior: {
+                    dining: "高效选择餐厅",
+                    cooking: "快速准备聚会餐点",
+                    social: "组织高效的聚餐活动",
+                    shopping: "精准购买，不浪费"
+                }
+            },
+            "AAOS": {
+                name: "理性独行者", englishName: "RATIONAL SOLO", avatar: "calculator",
+                description: "你是理性的独行者！你用科学的方法管理自己的饮食，不需要他人的认可。你的饮食习惯非常健康，是自己最好的营养师。",
+                traits: ["理性自律", "独立自主", "注重健康", "数据驱动"],
+                behavior: {
+                    dining: "独自享用健康餐",
+                    cooking: "精确计算营养搭配",
+                    social: "分享健康饮食理念",
+                    shopping: "购买高营养食材"
+                }
+            },
+            "SPSA": {
+                name: "慢食享受家", englishName: "SLOW FOODIE", avatar: "slow",
+                description: "你是优雅的慢食享受家！你相信好食物值得等待。你享受亲手烹饪的过程，珍惜独处时的美食时光。对你来说，慢慢品尝一口好菜，比狼吞虎咽更有意义。",
+                traits: ["享受过程", "品味细腻", "独处自在", "分析力强"],
+                behavior: {
+                    dining: "慢慢品味每一道菜",
+                    cooking: "享受烹饪的每个步骤",
+                    social: "偶尔分享，更享受独处",
+                    shopping: "精心挑选每一样食材"
+                }
             }
         };
 
         // 维度说明
         const dimensionInfo = {
-            "A": {
-                name: "冒险型",
-                icon: "🚀",
-                description: "喜欢尝试新事物，勇于探索未知的美食领域"
-            },
-            "S": {
-                name: "安全型",
-                icon: "🛡️",
-                description: "偏好熟悉的味道，追求稳定可靠的用餐体验"
-            },
-            "P": {
-                name: "过程型",
-                icon: "👨‍🍳",
-                description: "享受烹饪和品尝的过程，注重仪式感"
-            },
-            "O": {
-                name: "结果型",
-                icon: "🎯",
-                description: "追求美味的结果，效率优先"
-            },
-            "G": {
-                name: "共享型",
-                icon: "🤝",
-                description: "喜欢和他人分享美食，享受社交用餐"
-            },
-            "I": {
-                name: "直觉型",
-                icon: "💫",
-                description: "凭感觉和直觉选择食物，跟着味蕾走"
-            },
-            "A2": {
-                name: "分析型",
-                icon: "🔬",
-                description: "通过数据和分析做出食物决策"
-            }
+            "A": { name: "冒险型", icon: "🚀", desc: "喜欢尝试新事物，勇于探索未知的美食领域" },
+            "S": { name: "安全型", icon: "🛡️", desc: "偏好熟悉的味道，追求稳定可靠的用餐体验" },
+            "P": { name: "过程型", icon: "👨‍🍳", desc: "享受烹饪和品尝的过程，注重仪式感" },
+            "O": { name: "结果型", icon: "🎯", desc: "追求美味的结果，效率优先" },
+            "G": { name: "共享型", icon: "🤝", desc: "喜欢和他人分享美食，享受社交用餐" },
+            "I": { name: "独享型", icon: "🧘", desc: "享受独自用餐的时光，注重个人体验" },
+            "SA": { name: "分析型", icon: "🔬", desc: "通过数据和分析做出食物决策" }
         };
 
         let currentQuestion = 0;
         let selectedQuestions = [];
-        let dimensions = {
-            adventure: 0,
-            process: 0,
-            share: 0,
-            intuition: 0
-        };
+        let scores = { A: 0, S: 0, P: 0, O: 0, G: 0, I: 0 };
+        let history = JSON.parse(localStorage.getItem('foodti_history') || '[]');
 
-        // 随机抽取20道题（每个维度5道）
+        // 随机抽取20道题
         function selectQuestions() {
-            const dimensionGroups = {
-                AS: questionBank.filter(q => q.dimension === "AS"),
-                PO: questionBank.filter(q => q.dimension === "PO"),
-                GS: questionBank.filter(q => q.dimension === "GS"),
-                IA: questionBank.filter(q => q.dimension === "IA")
-            };
-
-            selectedQuestions = [];
+            const groups = { AS: [], PO: [], GS: [], IA: [] };
+            questionBank.forEach(q => groups[q.dimension].push(q));
             
-            // 从每个维度随机选5道
-            Object.values(dimensionGroups).forEach(group => {
+            selectedQuestions = [];
+            Object.values(groups).forEach(group => {
                 const shuffled = [...group].sort(() => Math.random() - 0.5);
                 selectedQuestions.push(...shuffled.slice(0, 5));
             });
-
-            // 打乱题目顺序
-            selectedQuestions = selectedQuestions.sort(() => Math.random() - 0.5);
+            
+            selectedQuestions.sort(() => Math.random() - 0.5);
         }
 
         function startTest() {
             selectQuestions();
             currentQuestion = 0;
-            dimensions = { adventure: 0, process: 0, share: 0, intuition: 0 };
+            scores = { A: 0, S: 0, P: 0, O: 0, G: 0, I: 0 };
             
             document.getElementById('homePage').style.display = 'none';
             document.getElementById('questionPage').style.display = 'flex';
@@ -1418,74 +1117,51 @@
             document.getElementById('questionDimension').textContent = q.dimensionName;
             document.getElementById('questionText').textContent = q.question;
             
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
             
-            const letters = ['A', 'B'];
-            q.options.forEach((option, index) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'option';
-                optionDiv.innerHTML = `
-                    <span class="option-letter">${letters[index]}</span>
-                    <span class="option-text">${option.text}</span>
-                `;
-                optionDiv.onclick = () => selectOption(index);
-                optionsContainer.appendChild(optionDiv);
+            const letters = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, i) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt.text}</span>`;
+                div.onclick = () => selectOption(i);
+                container.appendChild(div);
             });
 
-            // 重置动画
-            const card = document.getElementById('questionCard');
-            card.classList.remove('fade-in');
-            void card.offsetWidth;
-            card.classList.add('fade-in');
+            document.getElementById('questionCard').style.animation = 'none';
+            void document.getElementById('questionCard').offsetWidth;
+            document.getElementById('questionCard').style.animation = 'fadeInUp 0.5s ease';
         }
 
         function selectOption(index) {
             const q = selectedQuestions[currentQuestion];
-            const selectedValue = q.options[index].value;
+            const optScores = q.options[index].scores;
             
-            // 更新维度分数
-            switch(q.dimension) {
-                case 'AS':
-                    if (selectedValue === 'A') dimensions.adventure++;
-                    break;
-                case 'PO':
-                    if (selectedValue === 'P') dimensions.process++;
-                    break;
-                case 'GS':
-                    if (selectedValue === 'G') dimensions.share++;
-                    break;
-                case 'IA':
-                    if (selectedValue === 'I') dimensions.intuition++;
-                    break;
-            }
+            Object.keys(optScores).forEach(key => {
+                scores[key] = (scores[key] || 0) + optScores[key];
+            });
 
-            // 高亮选中的选项
             const options = document.querySelectorAll('.option');
-            options.forEach(opt => opt.classList.remove('selected'));
+            options.forEach(o => o.classList.remove('selected'));
             options[index].classList.add('selected');
 
-            // 延迟后进入下一题
             setTimeout(() => {
                 currentQuestion++;
                 if (currentQuestion < selectedQuestions.length) {
                     showQuestion();
                 } else {
-                    showLoading();
-                    setTimeout(() => {
-                        hideLoading();
-                        showResult();
-                    }, 1500);
+                    showResult();
                 }
             }, 400);
         }
 
         function calculateType() {
             const type = 
-                (dimensions.adventure >= 3 ? 'A' : 'S') +
-                (dimensions.process >= 3 ? 'P' : 'O') +
-                (dimensions.share >= 3 ? 'G' : 'S') +
-                (dimensions.intuition >= 3 ? 'I' : 'A');
+                (scores.A > scores.S ? 'A' : 'S') +
+                (scores.P > scores.O ? 'P' : 'O') +
+                (scores.G > scores.I ? 'G' : 'S') +
+                (scores.A > scores.S ? 'I' : 'A');
             return type;
         }
 
@@ -1496,77 +1172,78 @@
             const type = calculateType();
             const personality = personalityTypes[type] || personalityTypes['SOGI'];
             
-            document.getElementById('resultEmoji').textContent = personality.emoji;
+            document.getElementById('resultAvatar').innerHTML = avatarSVGs[personality.avatar] || avatarSVGs['casual'];
             document.getElementById('resultTitle').textContent = personality.name;
             document.getElementById('resultEnglish').textContent = personality.englishName;
             document.getElementById('resultDescription').textContent = personality.description;
             
-            const traitsContainer = document.getElementById('traitsContainer');
-            traitsContainer.innerHTML = personality.traits.map(trait => 
-                `<span class="trait">${trait}</span>`
-            ).join('');
+            document.getElementById('traitsContainer').innerHTML = 
+                personality.traits.map(t => `<span class="trait">${t}</span>`).join('');
             
-            drawRadarChart();
+            showBehaviorAnalysis(personality);
+            showDNAChart();
             showDimensionExplanations();
             
-            // 滚动到顶部
+            // 保存历史
+            saveHistory(personality);
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showBehaviorAnalysis(personality) {
+            const container = document.getElementById('behaviorAnalysis');
+            const icons = { dining: '🍽️', cooking: '👨‍🍳', social: '👥', shopping: '🛒' };
+            const labels = { dining: '用餐习惯', cooking: '烹饪风格', social: '社交特点', shopping: '采购偏好' };
+            
+            container.innerHTML = Object.entries(personality.behavior).map(([key, value]) => `
+                <div class="behavior-item">
+                    <span class="behavior-icon">${icons[key]}</span>
+                    <div class="behavior-content">
+                        <div class="behavior-label">${labels[key]}</div>
+                        <div class="behavior-value">${value}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showDNAChart() {
+            const container = document.getElementById('dnaChart');
+            const maxScore = 15;
+            
+            const dimensions = [
+                { name: '冒险度', value: scores.A, max: maxScore, color: '#E8652B' },
+                { name: '过程型', value: scores.P, max: maxScore, color: '#FF8C42' },
+                { name: '共享型', value: scores.G, max: maxScore, color: '#FFB347' },
+                { name: '直觉型', value: scores.I, max: maxScore, color: '#FFD699' }
+            ];
+            
+            container.innerHTML = dimensions.map(d => {
+                const percent = Math.round((d.value / d.max) * 100);
+                return `
+                    <div class="dna-bar">
+                        <span class="dna-label">${d.name}</span>
+                        <div class="dna-track">
+                            <div class="dna-fill" style="width: ${percent}%; background: ${d.color};">
+                                ${percent}%
+                            </div>
+                        </div>
+                        <span class="dna-value">${d.value}/${d.max}</span>
+                    </div>
+                `;
+            }).join('');
         }
 
         function showDimensionExplanations() {
             const container = document.getElementById('dimensionExplanations');
-            const total = 5; // 每个维度5道题
-            
-            const dimensionData = [
-                {
-                    name: '冒险 vs 安全',
-                    icon: '🎯',
-                    score: dimensions.adventure,
-                    total: total,
-                    left: 'A',
-                    right: 'S',
-                    leftName: '冒险型',
-                    rightName: '安全型'
-                },
-                {
-                    name: '过程 vs 结果',
-                    icon: '⚡',
-                    score: dimensions.process,
-                    total: total,
-                    left: 'P',
-                    right: 'O',
-                    leftName: '过程型',
-                    rightName: '结果型'
-                },
-                {
-                    name: '共享 vs 独享',
-                    icon: '🤝',
-                    score: dimensions.share,
-                    total: total,
-                    left: 'G',
-                    right: 'S',
-                    leftName: '共享型',
-                    rightName: '独享型'
-                },
-                {
-                    name: '直觉 vs 分析',
-                    icon: '💫',
-                    score: dimensions.intuition,
-                    total: total,
-                    left: 'I',
-                    right: 'A',
-                    leftName: '直觉型',
-                    rightName: '分析型'
-                }
+            const data = [
+                { name: '冒险 vs 安全', icon: '🎯', score: scores.A, total: 15, type: scores.A > scores.S ? 'A' : 'S' },
+                { name: '过程 vs 结果', icon: '⚡', score: scores.P, total: 15, type: scores.P > scores.O ? 'P' : 'O' },
+                { name: '共享 vs 独享', icon: '🤝', score: scores.G, total: 15, type: scores.G > scores.I ? 'G' : 'I' },
+                { name: '直觉 vs 分析', icon: '💫', score: scores.I, total: 15, type: scores.I > scores.A ? 'I' : 'SA' }
             ];
 
-            container.innerHTML = dimensionData.map(d => {
-                const percent = Math.round((d.score / d.total) * 100);
-                const isLeft = d.score >= 3;
-                const resultType = isLeft ? d.leftName : d.rightName;
-                const resultIcon = isLeft ? d.left : d.right;
-                const info = dimensionInfo[resultIcon] || dimensionInfo[resultIcon + '2'];
-                
+            container.innerHTML = data.map(d => {
+                const info = dimensionInfo[d.type];
                 return `
                     <div class="dimension-card">
                         <div class="dimension-header">
@@ -1574,144 +1251,88 @@
                             <span class="dimension-name">${d.name}</span>
                         </div>
                         <div class="dimension-score">${d.score}/${d.total}</div>
-                        <div class="dimension-label">倾向于: ${resultType}</div>
-                        <div class="dimension-desc">${info ? info.description : ''}</div>
+                        <div class="dimension-label">倾向于: ${info.name}</div>
+                        <div class="dimension-desc">${info.desc}</div>
                     </div>
                 `;
             }).join('');
         }
 
-        function drawRadarChart() {
-            const canvas = document.getElementById('radarChart');
-            const ctx = canvas.getContext('2d');
-            const size = 280;
-            canvas.width = size * 2;
-            canvas.height = size * 2;
-            canvas.style.width = size + 'px';
-            canvas.style.height = size + 'px';
-            ctx.scale(2, 2);
+        function saveHistory(personality) {
+            const record = {
+                id: Date.now(),
+                type: calculateType(),
+                name: personality.name,
+                englishName: personality.englishName,
+                avatar: personality.avatar,
+                scores: { ...scores },
+                date: new Date().toLocaleDateString('zh-CN')
+            };
             
-            const centerX = size / 2;
-            const centerY = size / 2;
-            const radius = 100;
+            history.unshift(record);
+            if (history.length > 20) history.pop();
+            localStorage.setItem('foodti_history', JSON.stringify(history));
+        }
+
+        function showHistory() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('historyPage').style.display = 'flex';
             
-            // 清空画布
-            ctx.clearRect(0, 0, size, size);
+            const container = document.getElementById('historyList');
             
-            // 维度标签
-            const labels = ['冒险度', '过程型', '共享型', '直觉型'];
-            const values = [
-                dimensions.adventure / 5,
-                dimensions.process / 5,
-                dimensions.share / 5,
-                dimensions.intuition / 5
-            ];
-            
-            // 绘制背景网格
-            for (let i = 5; i > 0; i--) {
-                const r = (radius * i) / 5;
-                ctx.beginPath();
-                for (let j = 0; j < 4; j++) {
-                    const angle = (Math.PI / 2) + (Math.PI * 2 * j) / 4;
-                    const x = centerX + r * Math.cos(angle);
-                    const y = centerY - r * Math.sin(angle);
-                    if (j === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                }
-                ctx.closePath();
-                ctx.strokeStyle = 'rgba(232, 101, 43, 0.1)';
-                ctx.lineWidth = 1;
-                ctx.stroke();
-                
-                if (i % 2 === 0) {
-                    ctx.fillStyle = 'rgba(232, 101, 43, 0.03)';
-                    ctx.fill();
-                }
-            }
-            
-            // 绘制坐标轴
-            for (let i = 0; i < 4; i++) {
-                const angle = (Math.PI / 2) + (Math.PI * 2 * i) / 4;
-                const x = centerX + radius * Math.cos(angle);
-                const y = centerY - radius * Math.sin(angle);
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.lineTo(x, y);
-                ctx.strokeStyle = 'rgba(232, 101, 43, 0.15)';
-                ctx.lineWidth = 1;
-                ctx.stroke();
-                
-                // 绘制标签
-                const labelX = centerX + (radius + 28) * Math.cos(angle);
-                const labelY = centerY - (radius + 28) * Math.sin(angle);
-                ctx.font = '600 13px -apple-system, sans-serif';
-                ctx.fillStyle = '#5C3D2E';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(labels[i], labelX, labelY);
-            }
-            
-            // 绘制数据区域
-            ctx.beginPath();
-            for (let i = 0; i < 4; i++) {
-                const angle = (Math.PI / 2) + (Math.PI * 2 * i) / 4;
-                const r = radius * Math.max(0.2, values[i]);
-                const x = centerX + r * Math.cos(angle);
-                const y = centerY - r * Math.sin(angle);
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.closePath();
-            
-            // 渐变填充
-            const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
-            gradient.addColorStop(0, 'rgba(232, 101, 43, 0.3)');
-            gradient.addColorStop(1, 'rgba(255, 140, 66, 0.15)');
-            ctx.fillStyle = gradient;
-            ctx.fill();
-            ctx.strokeStyle = '#E8652B';
-            ctx.lineWidth = 2.5;
-            ctx.stroke();
-            
-            // 绘制数据点
-            for (let i = 0; i < 4; i++) {
-                const angle = (Math.PI / 2) + (Math.PI * 2 * i) / 4;
-                const r = radius * Math.max(0.2, values[i]);
-                const x = centerX + r * Math.cos(angle);
-                const y = centerY - r * Math.sin(angle);
-                
-                // 外圈光晕
-                ctx.beginPath();
-                ctx.arc(x, y, 8, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(232, 101, 43, 0.2)';
-                ctx.fill();
-                
-                // 内圈
-                ctx.beginPath();
-                ctx.arc(x, y, 5, 0, Math.PI * 2);
-                ctx.fillStyle = '#E8652B';
-                ctx.fill();
-                ctx.strokeStyle = 'white';
-                ctx.lineWidth = 2;
-                ctx.stroke();
+            if (history.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-history">
+                        <div class="empty-history-icon">📋</div>
+                        <div class="empty-history-text">暂无历史记录</div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = history.map(h => `
+                    <div class="history-item" onclick="viewHistoryItem(${h.id})">
+                        <span class="history-emoji">${Object.values(avatarSVGs)[0]}</span>
+                        <div class="history-info">
+                            <div class="history-name">${h.name}</div>
+                            <div class="history-date">${h.date}</div>
+                        </div>
+                        <span class="history-arrow">→</span>
+                    </div>
+                `).join('');
             }
         }
 
-        function showLoading() {
-            document.getElementById('loading').classList.add('active');
+        function viewHistoryItem(id) {
+            const item = history.find(h => h.id === id);
+            if (!item) return;
+            
+            scores = { ...item.scores };
+            document.getElementById('historyPage').style.display = 'none';
+            document.getElementById('resultPage').style.display = 'flex';
+            
+            const personality = personalityTypes[item.type] || personalityTypes['SOGI'];
+            document.getElementById('resultAvatar').innerHTML = avatarSVGs[personality.avatar] || avatarSVGs['casual'];
+            document.getElementById('resultTitle').textContent = personality.name;
+            document.getElementById('resultEnglish').textContent = personality.englishName;
+            document.getElementById('resultDescription').textContent = personality.description;
+            document.getElementById('traitsContainer').innerHTML = personality.traits.map(t => `<span class="trait">${t}</span>`).join('');
+            
+            showBehaviorAnalysis(personality);
+            showDNAChart();
+            showDimensionExplanations();
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function hideLoading() {
-            document.getElementById('loading').classList.remove('active');
+        function backToHome() {
+            document.getElementById('historyPage').style.display = 'none';
+            document.getElementById('homePage').style.display = 'flex';
         }
 
-        function showToast(message) {
+        function showToast(msg) {
             const toast = document.getElementById('toast');
-            toast.textContent = message;
+            toast.textContent = msg;
             toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
+            setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
         function shareToWechat() {
@@ -1720,33 +1341,21 @@
 
         function shareToWeibo() {
             const type = calculateType();
-            const personality = personalityTypes[type];
-            const text = `我的FoodTI食物人格是【${personality.name}】${personality.emoji}！${personality.description.substring(0, 50)}... 快来测测你的食物人格是什么？`;
-            const url = `https://service.weibo.com/share/share.php?title=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
+            const p = personalityTypes[type];
+            const text = `我的FoodTI食物人格是【${p.name}】！快来测测你的食物人格是什么？`;
+            window.open(`https://service.weibo.com/share/share.php?title=${encodeURIComponent(text)}`, '_blank');
         }
 
-        function copyResult() {
-            const type = calculateType();
-            const personality = personalityTypes[type];
-            const text = `🍕 FoodTI 食物人格测试\n\n我的结果：${personality.emoji} ${personality.name}\n${personality.englishName}\n\n${personality.description}\n\n快来测测你的食物人格吧！`;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('结果已复制到剪贴板，快去分享吧！');
+        function copyShareLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('链接已复制，快去分享吧！');
             }).catch(() => {
-                const textarea = document.createElement('textarea');
-                textarea.value = text;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                showToast('结果已复制到剪贴板，快去分享吧！');
+                showToast('请手动复制浏览器地址栏链接');
             });
         }
 
         function restartTest() {
-            currentQuestion = 0;
-            dimensions = { adventure: 0, process: 0, share: 0, intuition: 0 };
             document.getElementById('resultPage').style.display = 'none';
             document.getElementById('homePage').style.display = 'flex';
             window.scrollTo({ top: 0, behavior: 'smooth' });
