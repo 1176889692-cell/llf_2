@@ -734,6 +734,195 @@ body::before {
   to { transform: rotate(360deg); }
 }
 
+/* ---------- Fun Fact ---------- */
+.fun-fact {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.06) 0%, rgba(255, 179, 71, 0.06) 100%);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--primary);
+}
+
+.fun-fact-icon {
+  font-size: 18px;
+  min-width: 24px;
+}
+
+.fun-fact-text {
+  font-size: 14px;
+  color: var(--text-medium);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ---------- Personality Card ---------- */
+#personality-card {
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  animation: cardReveal 0.8s ease forwards;
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.pcard-inner {
+  position: relative;
+  padding: 32px 24px 20px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: white;
+}
+
+.pcard-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 20px;
+  padding: 16px;
+  opacity: 0.08;
+  font-size: 48px;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.pcard-pattern span {
+  animation: patternFloat 4s ease-in-out infinite;
+}
+
+.pcard-pattern span:nth-child(2n) {
+  animation-delay: 0.5s;
+}
+
+.pcard-pattern span:nth-child(3n) {
+  animation-delay: 1s;
+}
+
+@keyframes patternFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(5deg); }
+}
+
+.pcard-bg-emoji {
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  font-size: 140px;
+  opacity: 0.08;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.pcard-content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.pcard-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.pcard-emoji {
+  font-size: 64px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  animation: emojiPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes emojiPop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.pcard-name {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 4px;
+}
+
+.pcard-en {
+  font-size: 13px;
+  opacity: 0.8;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.pcard-divider {
+  width: 40px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 1px;
+  margin-bottom: 16px;
+}
+
+.pcard-tagline {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.95;
+  max-width: 300px;
+  margin-bottom: 12px;
+}
+
+.pcard-traits {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  font-size: 12px;
+  opacity: 0.85;
+  letter-spacing: 0.5px;
+}
+
+.pcard-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 11px;
+  opacity: 0.6;
+}
+
 /* ---------- Print / Screenshot ---------- */
 @media print {
   .share-section, .nav-buttons, .progress-container, .restart-btn {
