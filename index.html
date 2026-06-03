@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="FoodTI - 测测你的食物人格是什么？四个维度，解码你的美食DNA。">
+  <meta name="keywords" content="食物人格, 美食测试, FoodTI, 食物类型, 性格测试">
+  <meta property="og:title" content="FoodTI - 食物人格测试">
+  <meta property="og:description" content="测测你的食物人格是什么？四个维度，解码你的美食DNA。">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FoodTI - 食物人格测试">
+  <meta name="twitter:description" content="测测你的食物人格是什么？四个维度，解码你的美食DNA。">
+  <title>FoodTI - 食物人格测试</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+  <div id="toast" class="toast"></div>
+
+  <div class="app">
+
+    <!-- ===== Landing Page ===== -->
+    <div id="landing" class="page landing active">
+      <div class="logo-emoji">🍜</div>
+      <h1 class="title">FoodTI</h1>
+      <p class="subtitle">
+        测测你的食物人格是什么？
+        <span class="divider">四个维度，解码你的美食DNA</span>
+      </p>
+      <button class="start-btn" onclick="startQuiz()">
+        开始测试 🍴
+      </button>
+      <div class="landing-features">
+        <div class="feature-item">
+          <span class="feature-icon">🧩</span>
+          <span>18道题</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">⏱️</span>
+          <span>3分钟</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🎯</span>
+          <span>4个维度</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🏆</span>
+          <span>8种类型</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Quiz Page ===== -->
+    <div id="quiz" class="page">
+      <div class="progress-container">
+        <div class="progress-info">
+          <span id="progress-text" class="progress-text">1 / 18</span>
+          <span id="progress-dim" class="progress-dim">冒险-安全维度</span>
+        </div>
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div id="question-container" class="question-card">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="nav-buttons">
+        <button id="btn-back" class="nav-btn back hidden" onclick="goBack()">← 上一题</button>
+        <button id="btn-next" class="nav-btn next" onclick="goNext()" disabled>下一题 →</button>
+      </div>
+    </div>
+
+    <!-- ===== Result Page ===== -->
+    <div id="result" class="page result-page">
+      <div class="result-header">
+        <div class="result-label">你的食物人格是</div>
+        <div id="result-emoji" class="result-type-emoji">🧭</div>
+        <div id="result-name" class="result-type-name">美食探险家</div>
+        <div id="result-en" class="result-type-en">Food Explorer</div>
+        <div id="result-tagline" class="result-tagline"></div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-card-title">📊 你的美食DNA</div>
+        <div class="chart-container">
+          <canvas id="radar-chart"></canvas>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-card-title">📈 维度详情</div>
+        <div id="dimension-bars" class="dimension-bars">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-card-title">📝 类型解读</div>
+        <div id="result-description" class="result-description">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-card-title">🗺️ 所有食物人格</div>
+        <div id="type-grid" class="type-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <div class="share-section">
+        <div class="share-buttons">
+          <button class="share-btn primary" onclick="shareResult()">📤 分享结果</button>
+          <button class="share-btn secondary" onclick="copyLink()">🔗 复制链接</button>
+        </div>
+        <button class="restart-btn" onclick="restart()">🔄 重新测试</button>
+      </div>
+
+      <div class="footer">FoodTI — 四个维度，解码你的美食DNA</div>
+    </div>
+
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
